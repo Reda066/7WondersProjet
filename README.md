@@ -12,3 +12,9 @@ L'objectif sera tout d'abord de définir des itérations afin d'avoir une bonne 
 ## Equipe
 
 NABIL Inès, NITEKA Lys Ciella, JALAL Réda.
+
+## Licence
+
+[MIT](https://opensource.org/licenses/MIT)
+
+Copyright (c) 2019-present, NABIL Inès, NITEKA Lys Ciella, JALAL Réda
