@@ -10,13 +10,23 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>7W</artifactId>
+    <artifactId>client</artifactId>
     <version>0.1</version>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> <!-- éventuellement à changer : encodage de vos fichiers -->
+        <compiler.source>1.8</compiler.source> <!-- éventuellement à changer : version de java (sdk) utilisée pour le développement -->
+        <compiler.target>1.8</compiler.target> <!-- éventuellement à changer : version de java pour l'utilisateur -->
+    </properties>
 
     <build>
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <plugins>            
+        <sourceDirectory>src/main/java</sourceDirectory>  <!-- éventuellement à changer : localisation des fichiers sources -->
+
+
+        <plugins>
+
+
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -29,12 +39,13 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>7W.Lanceur</mainClass>
+                    <mainClass>client.Client</mainClass>
                 </configuration>
-            </plugin>  
+            </plugin>
+
         </plugins>
     </build>
-    
+
     <dependencies>
         <dependency>
             <groupId>7w</groupId>
@@ -42,14 +53,9 @@
             <version>0.1</version>
         </dependency>
         <dependency>
-            <groupId>7w</groupId>
-            <artifactId>client</artifactId>
-            <version>0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>7w</groupId>
-            <artifactId>serveur</artifactId>
-            <version>0.1</version>
+            <groupId>io.socket</groupId>
+            <artifactId>socket.io-client</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 </project>
