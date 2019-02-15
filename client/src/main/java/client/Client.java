@@ -22,19 +22,19 @@ public class Client {
     int propositionCourante = 50;
 
     // Objet de synchro
-    final Object attenteDéconnexion = new Object();
+    final Object attenteDeconnexion = new Object();
 
     public Client(String urlServeur) {
 
         try {
             connexion = IO.socket(urlServeur);
 
-            System.out.println("on s'abonne à la connection / déconnection ");;
+            System.out.println("on s'abonne e la connection / deconnection ");;
 
             connexion.on("connect", new Emitter.Listener() {
                 @Override
                 public void call(Object... objects) {
-                    System.out.println(" on est connecté ! et on s'identifie ");
+                    System.out.println(" on est connecte ! et on s'identifie ");
 
                     // on s'identifie
                     JSONObject id = new JSONObject(moi);
@@ -46,12 +46,12 @@ public class Client {
             connexion.on("disconnect", new Emitter.Listener() {
                 @Override
                 public void call(Object... objects) {
-                    System.out.println(" !! on est déconnecté !! ");
+                    System.out.println(" !! on est deconnecte !! ");
                     connexion.disconnect();
                     connexion.close();
 
-                    synchronized (attenteDéconnexion) {
-                        attenteDéconnexion.notify();
+                    synchronized (attenteDeconnexion) {
+                        attenteDeconnexion.notify();
                     }
                 }
             });
@@ -62,15 +62,15 @@ public class Client {
                 @Override
                 public void call(Object... objects) {
                     int pas = 1;
-                    System.out.println("on a reçu une question avec "+objects.length+" paramètre(s) ");
+                    System.out.println("on a reeu une question avec "+objects.length+" parametre(s) ");
                     if (objects.length > 0 ) {
-                        System.out.println("la réponse précédente était : "+objects[0]);
+                        System.out.println("la reponse precedente etait : "+objects[0]);
 
                         boolean plusGrand = (Boolean)objects[0];
                         // false, c'est plus petit... !! erreur... dans les commit d'avant
 
-                            if (plusGrand)  pas=-1;
-                            else pas=+1;
+                        if (plusGrand)  pas=-1;
+                        else pas=+1;
 
 
                         System.out.println(objects[1]);
@@ -91,8 +91,8 @@ public class Client {
 
                     }
                     propositionCourante += pas;
-                    System.out.println("on répond "+propositionCourante);
-                    connexion.emit("réponse",  propositionCourante);
+                    System.out.println("on repond "+propositionCourante);
+                    connexion.emit("reponse",  propositionCourante);
                 }
             });
 
@@ -108,10 +108,10 @@ public class Client {
         // on se connecte
         connexion.connect();
 
-        System.out.println("en attente de déconnexion");
-        synchronized (attenteDéconnexion) {
+        System.out.println("en attente de deconnexion");
+        synchronized (attenteDeconnexion) {
             try {
-                attenteDéconnexion.wait();
+                attenteDeconnexion.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 System.err.println("erreur dans l'attente");

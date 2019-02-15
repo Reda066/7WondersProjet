@@ -4,24 +4,31 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>7w</groupId>
-    <artifactId>7Wonders</artifactId>
-    <version>0.1</version>
-	
-	<modules>
-		<module>moteur</module>
-		<module>serveur</module>
+    <groupId>client-serveur</groupId>
+    <artifactId>client-serveur</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>commun</module>
+        <module>serveur</module>
         <module>client</module>
-        <module>7w</module>
-	</modules>
-	<packaging>pom</packaging>
+        <module>lanceur</module>
+    </modules>
+
+    <packaging>pom</packaging>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> <!-- éventuellement à changer : encodage de vos fichiers -->
         <compiler.source>1.8</compiler.source> <!-- éventuellement à changer : version de java (sdk) utilisée pour le développement -->
         <compiler.target>1.8</compiler.target> <!-- éventuellement à changer : version de java pour l'utilisateur -->
     </properties>
+
     <build>
+
+
         <plugins>
+
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -31,9 +38,52 @@
                     <target>1.8</target> <!-- éventuellement à changer : version de java -->
                 </configuration>
             </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <show>package</show>
+                    <nohelp>true</nohelp>
+                    <encoding>utf-8</encoding> <!-- éventuellement à changer : encodage de vos fichiers -->
+                    <charset>utf-8</charset> <!-- éventuellement à changer : encodage de vos fichiers -->
+                    <docencoding>utf-8</docencoding>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>javadoc</id>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                        <phase>site</phase>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/</outputDirectory>
+                            <reportOutputDirectory>${basedir}/target/</reportOutputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test-javadoc</id>
+                        <goals>
+                            <goal>test-javadoc</goal>
+                        </goals>
+                        <phase>site</phase>
+                        <configuration>
+                            <reportOutputDirectory>${basedir}/target/test/</reportOutputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+
+            </plugin>
+
+
         </plugins>
     </build>
+
     <dependencies>
-        <!-- Aucune dans la racine -->
+
     </dependencies>
+
 </project>
