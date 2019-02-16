@@ -21,10 +21,10 @@
 
 ### - Création du package « commun » où il y aura les classes ressources en commun à savoir :
 
-#### - Carte
-#### - Coups
-#### - Identification
-#### - Joueur
-#### - Matériaux
-#### - Merveilles
-#### - Plateau
+   #### - Carte
+   #### - Coups
+   #### - Identification
+   #### - Joueur
+   #### - Matériaux
+   #### - Merveilles
+   #### - Plateau
