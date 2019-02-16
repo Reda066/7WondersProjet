@@ -7,9 +7,9 @@ public class Identification {
 
     public Identification() {}
 
-    public Identification(String nom, int niveau) {
+    public Identification(String nom, int level) {
         this.nom = nom;
-        this.niveau = niveau;
+        niveau = level;
     }
 
 

@@ -6,13 +6,13 @@
 
 
     <parent>
-        <groupId>7w</groupId>
-        <artifactId>7Wonders</artifactId>
-        <version>0.1</version>
+        <groupId>client-serveur</groupId>
+        <artifactId>client-serveur</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>serveur</artifactId>
-    <version>0.1</version>
+    <version>1.0-SNAPSHOT</version>
 
 
     <properties>
@@ -50,9 +50,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>7w</groupId>
-            <artifactId>moteur</artifactId>
-            <version>0.1</version>
+            <groupId>client-serveur</groupId>
+            <artifactId>commun</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>com.corundumstudio.socketio</groupId>
@@ -68,12 +68,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.25</version>
-        </dependency>
-        <dependency>
-            <groupId>7w</groupId>
-            <artifactId>moteur</artifactId>
-            <version>0.1</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 

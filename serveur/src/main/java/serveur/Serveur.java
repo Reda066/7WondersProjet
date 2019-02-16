@@ -1,6 +1,5 @@
 package serveur;
 
-
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOClient;
@@ -15,14 +14,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 /**
- * attend une connexion, on envoie une question puis on attend une reponse, jusqu'e la decouverte de la bonne reponse
+ * attend une connexion, on envoie une question puis on attend une réponse, jusqu'à la découverte de la bonne réponse
  * le client s'identifie (som, niveau)
  */
 public class Serveur {
 
     SocketIOServer serveur;
     final Object attenteConnexion = new Object();
-    private int aTrouve = 42;
+    private int àTrouvé = 42;
     Identification leClient ;
 
     ArrayList<Coup> coups = new ArrayList<>();
@@ -32,18 +31,20 @@ public class Serveur {
         // creation du serveur
         serveur = new SocketIOServer(config);
 
-        System.out.println("preparation du listener");
+        // Objet de synchro
 
-        //Connexion
+        System.out.println("préparation du listener");
+
+        // on accept une connexion
         serveur.addConnectListener(new ConnectListener() {
             public void onConnect(SocketIOClient socketIOClient) {
                 System.out.println("connexion de "+socketIOClient.getRemoteAddress());
 
-                // on ne s'arrete plus ici
+                // on ne s'arrête plus ici
             }
         });
 
-        // reception d'une identification
+        // réception d'une identification
         serveur.addEventListener("identification", Identification.class, new DataListener<Identification>() {
             @Override
             public void onData(SocketIOClient socketIOClient, Identification identification, AckRequest ackRequest) throws Exception {
@@ -56,21 +57,21 @@ public class Serveur {
         });
 
 
-        // on attend une reponse
-        serveur.addEventListener("reponse", int.class, new DataListener<Integer>() {
+            // on attend une réponse
+        serveur.addEventListener("réponse", int.class, new DataListener<Integer>() {
             @Override
             public void onData(SocketIOClient socketIOClient, Integer integer, AckRequest ackRequest) throws Exception {
-                System.out.println("La reponse de  "+leClient.getNom()+" est "+integer);
-                Coup coup = new Coup(integer, integer > aTrouve);
-                if (integer == aTrouve) {
-                    System.out.println("le client a trouve ! ");
+                System.out.println("La réponse de  "+leClient.getNom()+" est "+integer);
+                Coup coup = new Coup(integer, integer > àTrouvé);
+                if (integer == àTrouvé) {
+                    System.out.println("le client a trouvé ! ");
                     synchronized (attenteConnexion) {
                         attenteConnexion.notify();
                     }
                 } else
                 {
                     coups.add(coup);
-                    System.out.println("le client doit encore cherche ");
+                    System.out.println("le client doit encore cherché ");
                     poserUneQuestion(socketIOClient, coup.isPlusGrand());
                 }
 
@@ -82,7 +83,7 @@ public class Serveur {
     }
 
 
-    private void demarrer() {
+    private void démarrer() {
 
         serveur.start();
 
@@ -96,7 +97,7 @@ public class Serveur {
             }
         }
 
-        System.out.println("Une connexion est arrivee, on arrete");
+        System.out.println("Une connexion est arrivée, on arrête");
         serveur.stop();
 
     }
@@ -125,7 +126,7 @@ public class Serveur {
 
 
         Serveur serveur = new Serveur(config);
-        serveur.demarrer();
+        serveur.démarrer();
 
 
         System.out.println("fin du main");

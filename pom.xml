@@ -7,15 +7,15 @@
     <groupId>client-serveur</groupId>
     <artifactId>client-serveur</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-    <modules>
-        <module>commun</module>
-        <module>serveur</module>
+	
+	<modules>
+		<module>commun</module>
+		<module>serveur</module>
         <module>client</module>
         <module>lanceur</module>
-    </modules>
+	</modules>
 
-    <packaging>pom</packaging>
+	<packaging>pom</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> <!-- éventuellement à changer : encodage de vos fichiers -->
@@ -77,13 +77,13 @@
                 </executions>
 
             </plugin>
-
+            
 
         </plugins>
     </build>
 
     <dependencies>
-
+        
     </dependencies>
 
 </project>
