@@ -11,12 +11,13 @@
 
 ## Livraison 2
 
+- Corriger les bugs de la livraison 1
 - Communication Client/serveur
 - Faire les cartes merveilles (nom, face,production)
-- Faire les 5 matières premières (avec leur coût de construction)
 
 ## Livraison 3
 
+- Faire les 5 matières premières (avec leur coût de construction)
 - Bâtiments millitaires (gagnant ou perdant)
 - Bâtiments commerciaux
 - Construction des merveilles
