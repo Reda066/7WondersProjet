@@ -13,7 +13,7 @@
 
 - Corriger les bugs de la livraison 1
 - Communication Client/serveur
-- Faire les cartes merveilles (nom, face,production)
+- Controlleur Carte/Merveille
 
 ## Livraison 3
 
