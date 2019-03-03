@@ -13,6 +13,7 @@
 
 - Communication Client/serveur
 - Faire les cartes merveilles (nom, face,production)
+- Modification nom des joueurs
 
 ## Livraison 3
 
