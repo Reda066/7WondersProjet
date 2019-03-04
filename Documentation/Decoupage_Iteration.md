@@ -12,7 +12,7 @@
 ## Livraison 2
 
 - Communication Client/serveur
-- Faire les cartes merveilles (nom, face,production)
+- Faire les plateaux
 - Modification nom des joueurs
 
 ## Livraison 3
