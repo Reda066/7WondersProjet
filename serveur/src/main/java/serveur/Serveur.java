@@ -31,7 +31,7 @@ public class Serveur {
     System.out.println("SERVEUR >  Création des écouteurs d'évenements");
     serveur.addConnectListener(new ConnectListener() {
       public void onConnect(SocketIOClient client) {
-        System.out.println("SERVEUR >  Connexion d'un client" + client.getSessionId());
+        System.out.println("SERVEUR >  Connexion d'un client");
         partie.ajouter_joueur(client.getSessionId());
         if(partie.getJoueurs().size()==4)
           partie.commencer();

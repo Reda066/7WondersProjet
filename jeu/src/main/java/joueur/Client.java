@@ -3,16 +3,8 @@ package joueur;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
-import jeu.Carte;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
-
-import java.util.concurrent.TimeUnit;
 
 
 public class Client {
@@ -24,6 +16,11 @@ public class Client {
   public Client(){
     // Joueur sans connexion
   };
+
+  public String getConnexionId() {
+    return connexion.id();
+  }
+
   public Client(String urlServeur) {
 
     try {

@@ -42,13 +42,12 @@ public class Partie {
             }
         });
 
-
     }
-      
+
         public void ajouter_joueur(UUID id ){
 
         Joueur j = new Joueur(id,joueurs.size());
-        System.out.println("Partie > Ajout du joueur "+j.id()+" avec le rang "+j.getRang());
+        System.out.println("Partie > Ajout du joueur "+j.getRang());
         joueurs.add(j);
     }
 
@@ -63,7 +62,6 @@ public class Partie {
         for (int i=0; i< joueurs.size();i++){
             joueurs.get(i).setMerveille(merveilles.get(i));
             serveur.getClient(joueurs.get(i).id()).sendEvent("reception_merveille",merveilles.get(i).id);
-            System.out.println("Serveur &&  Partie > Affectation de la merveille N° "+merveilles.get(i).id +" de face"+merveilles.get(i).face+ " au joueur "+joueurs.get(i).id().toString());            // emit au serveur au joueur x la merveille y
         }
         return true;
     }

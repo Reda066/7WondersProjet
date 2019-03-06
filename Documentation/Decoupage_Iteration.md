@@ -22,15 +22,13 @@
 
 ## Livraison 4
 
-- Pièces de monaie
-- Prix des cartes en monnaie
-- Achat entre joueur
-- Défaussage pour obtenir des pièces
+- Distribution Pièces de monaie
+- Intégrer le score
+- Corriger le nom des joueurs dans la sortie
 
 ## Livraison 5
 
 - Faire l'âge 2
-- Ajouter la face B
 - Liaison avec les bâtiments gratuits
 
 ## Livraison 6
@@ -40,6 +38,5 @@
 
 ## Livraison 7
 
-- Faire l&#39;âge 3
 - Ajout des guildes
 - Ajout des bâtiments scientifiques

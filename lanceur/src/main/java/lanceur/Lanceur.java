@@ -18,28 +18,28 @@ public class Lanceur {
     Thread p1 = new Thread(new Runnable() {
       @Override
       public void run() {
-        Joueur c = new Joueur(url);
+        Joueur c = new Joueur("Reda",url);
         c.seConnecter();
       }
     });
     Thread p2 = new Thread(new Runnable() {
       @Override
       public void run() {
-        Joueur c = new Joueur(url);
+        Joueur c = new Joueur("Ciella",url);
         c.seConnecter();
       }
     });
     Thread p3 = new Thread(new Runnable() {
       @Override
       public void run() {
-        Joueur c = new Joueur(url);
+        Joueur c = new Joueur("Ines",url);
         c.seConnecter();
       }
     });
     Thread p4 = new Thread(new Runnable() {
       @Override
       public void run() {
-        Joueur c = new Joueur(url);
+        Joueur c = new Joueur("Joueur4",url);
         c.seConnecter();
       }
     });
