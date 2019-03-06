@@ -5,19 +5,18 @@ public class Carte {
     private Couleur couleur;
     private int id;
     private String nom;
+    private Materiaux materiaux;
 
     private int points ;
-    public int getpoints() {
-        return points;
-    }
 
 
-    public Carte(Age age, Couleur couleur, int id,String nom, int points) {
+    public Carte(Age age, Couleur couleur,Materiaux materiaux, int id,String nom, int points) {
         this.age = age;
         this.couleur = couleur;
         this.id = id;
         this.nom = nom;
         this.points = points;
+        this.materiaux=materiaux;
     }
     public Carte(){
         age=null;
@@ -45,10 +44,15 @@ public class Carte {
     public int getId() {
         return id;
     }
-    
+
+    public int getpoints() {
+        return points;
+    }
+
     @Override
     public String toString() {
-        return  "Age:" + this.age+ " - Couleur: "+this.couleur+" - "+ "ID: "+this.id+" - "+ "Nom: "+this.nom+" - "+ "Points: "+this.points;
+        return  "Age:" + this.age+ " - Couleur: "+this.couleur+" " + "- "+ "MATERIAUX: "+this.materiaux+ " - " + "ID: "+this.id+" - "+ "Nom: "+this.nom+" - "+ "Points: "+this.points;
 
     }
+
 }
