@@ -29,14 +29,14 @@
 ## Livraison 5
 
 - Faire l'âge 2
-- Liaison avec les bâtiments gratuits
+- Lier les cartes entre elles (possibilité de mettre une carte gratuite sur le terrain si une autre carte nous le permet=
 
 ## Livraison 6
 
-- Choix du nombre de joueurs
+- Choisir du nombre de joueurs
 - Prise en comptes des cartes en fonctions du nombre de joueurs
 
 ## Livraison 7
 
-- Ajout des guildes
-- Ajout des bâtiments scientifiques
+- Ajouter des guildes
+- Ajouter des bâtiments scientifiques
