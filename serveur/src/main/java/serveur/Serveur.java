@@ -1,26 +1,19 @@
 package serveur;
 
-
+import joueur.Joueur;
+import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
+import com.corundumstudio.socketio.listener.DataListener;
 import jeu.*;
-
 
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 
-/**
- * attend une connexion, on envoie une question puis on attend une réponse, jusqu'à la découverte de la bonne réponse
- * le client s'identifie (som, niveau)
- */
 public class Serveur {
   SocketIOServer serveur;
-
-  /* TODO: 15/02/2019 [AMELIORATION] Pour une prochaine itération
-      Créer une List de parties pour pouvoir simuler autant de parties qu'on veut 😈😈😈
-  */
   Partie partie;
 
   public Serveur(Configuration config) {
@@ -28,13 +21,21 @@ public class Serveur {
     serveur = new SocketIOServer(config);
     partie = new Partie(serveur);
 
-    System.out.println("SERVEUR >  Création des écouteurs d'évenements");
+    serveur.addEventListener("voila_mon_nom", String.class, new DataListener<String>() {
+      public void onData(SocketIOClient client, String nom, AckRequest ackRequest) throws Exception {
+
+        synchronized (Serveur.this) {
+          Participant p = new Participant(nom, client.getSessionId(), partie.getJoueurs().size());
+          partie.ajouter_joueur(p);
+        }
+        if(partie.getJoueurs().size()>=3 && partie.getJoueurs().size()<=7)
+          partie.commencer();
+      }
+    });
+    System.out.println("[SERVEUR] Initialisation et création des écouteurs d'évenements");
     serveur.addConnectListener(new ConnectListener() {
       public void onConnect(SocketIOClient client) {
-        System.out.println("SERVEUR >  Connexion d'un client");
-        partie.ajouter_joueur(client.getSessionId());
-        if(partie.getJoueurs().size()==4)
-          partie.commencer();
+        System.out.println("[SERVEUR] Un nouveau client s'est connecté.");
       }
     });
   }
@@ -48,16 +49,16 @@ public class Serveur {
 
     Configuration config = new Configuration();
     config.setHostname("127.0.0.1");
-    config.setPort(10101);
+    config.setPort(9000);
 
 
     Serveur serveur = new Serveur(config);
-    serveur.démarrer();
+    serveur.demarrer();
 
   }
-  private void démarrer() {
+  private void demarrer() {
     serveur.start();
-    System.out.println("SERVEUR >  Serveur démarré, en attente des clients pour se connecter.");
+    System.out.println("[SERVEUR] Serveur démarré, en attente des clients pour se connecter.");
   }
 
 }

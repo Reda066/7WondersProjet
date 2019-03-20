@@ -2,8 +2,8 @@ package jeu.gestion;
 import jeu.Age;
 import jeu.Carte;
 import jeu.Couleur;
-import org.json.JSONArray;
 import jeu.Materiaux;
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,10 +18,11 @@ public class gestionCarte {
 
     if (a.equals(Age.I)) {
       if (nb_joueurs >= 3) {
+
         /*-------------------------------------------------------------------------BLEU----------------------------------------------------------------------------*/
-          cartes.add(new Carte(Age.I, Couleur.BLEU, "Autel", 2, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
-          cartes.add(new Carte(Age.I, Couleur.BLEU, "Bains", 3, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
-          cartes.add(new Carte(Age.I, Couleur.BLEU, "Theatre", 2, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
+        cartes.add(new Carte(Age.I, Couleur.BLEU, "Autel", 2, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
+        cartes.add(new Carte(Age.I, Couleur.BLEU, "Bains", 3, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
+        cartes.add(new Carte(Age.I, Couleur.BLEU, "Theatre", 2, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
         /*-------------------------------------------------------------------------ROUGE----------------------------------------------------------------------------*/
         cartes.add(new Carte(Age.I, Couleur.ROUGE, "Caserne", 0, new Materiaux(0, 0, 0, 0, 1, 0, 0, 0)));
         cartes.add(new Carte(Age.I, Couleur.ROUGE, "Palissade", 0, new Materiaux(0, 0, 1, 0, 0, 0, 0, 0)));

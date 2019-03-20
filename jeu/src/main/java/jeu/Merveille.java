@@ -1,51 +1,43 @@
 package jeu;
 
-
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Merveille {
 
     protected String nom;
-    protected int id ;
-    //protected Face face1, face2;
-    protected Face face;
-
-    protected ArrayList<Carte> cartesPosé = new ArrayList<Carte>(){};
-
-
-    public Merveille(int i , String n){
+    protected Face cote;
+    protected int etages;
+    protected ArrayList<Carte> cartesPose = new ArrayList<Carte>(){};
+    public Merveille(String n,Face face,int nb_etages_si_face_A,int nb_etages_si_face_B){
         nom=n;
-        id=i;
-
-        face = getFace();
-
+        cote=face;
+        etages = face == Face.A?nb_etages_si_face_A:nb_etages_si_face_B;
+    }
+    public Merveille(String n,Face face,int nb_etages){
+        nom=n;
+        cote=face;
+        etages = nb_etages;
     }
     public void poserUneCarte(Carte c){
-        cartesPosé.add(c);
+        cartesPose.add(c);
     }
 
-    public ArrayList<Carte> getCartesPosé(){
-        return cartesPosé;
+    public ArrayList<Carte> getCartesPose(){
+        return cartesPose;
     }
 
     public String getNom(){
         return nom;
     }
-
-    public int getId(){
-        return id;
+    public Face getFace(){return this.cote;}
+    public void setFace(Face face) {
+         this.cote=face;
+    }
+    public void setNbEtages(int nbEtapes) {
+        this.etages = nbEtapes;
     }
 
-    public Face getFace(){
-        Face f;
-        Random r = new Random();
-        int i = r.nextInt(Face.values().length);
-        f = Face.values()[i];
-
-        return f;
-    }
-
-
-
+    // LE NOMBRE D'ETAPE ME PERMET JUSTE DE VERIFIER QUE L'ON CHANGE BIEN LA FACE DE LA MERVEILLE
 }

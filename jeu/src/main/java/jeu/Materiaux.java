@@ -3,6 +3,7 @@ package jeu;
 import java.util.ArrayList;
 
 public class Materiaux {
+
     protected ArrayList<Integer> listeMateriaux = new ArrayList<Integer>(){};
 
     public Materiaux(int monnaie, int pierre, int bois, int argile, int minerai, int textile, int papyrus, int verre) {

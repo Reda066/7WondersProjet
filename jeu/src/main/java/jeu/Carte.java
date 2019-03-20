@@ -3,12 +3,16 @@ public class Carte {
     
     private Age age;
     private Couleur couleur;
-    private int id;
     private String nom;
-    private int points ;
     private Materiaux cout;
-    private int pointsVictoire ;
 
+    private int pointsVictoire ;
+    public int getPointsVictoire() {
+        return pointsVictoire;
+    }
+
+
+    
     public Carte(Age age, Couleur couleur, String nom, int pointsVictoire, Materiaux cout) {
         this.age = age;
         this.couleur = couleur;
@@ -19,38 +23,50 @@ public class Carte {
     public Carte(){
         age=null;
         couleur=null;
-        id=0;
         nom="";
-        points=0;
+        pointsVictoire=0;
+        cout = null;
     }
 
     public Carte(Carte c){
         age=c.age;
         couleur=c.couleur;
-        id=c.id;
         nom=c.nom;
-        points=c.points;
+        pointsVictoire=c.pointsVictoire;
+        cout =c.cout;
     }
     public Age getAge() {
         return age;
     }
-    
+
+    public void setAge(Age age) {
+        this.age = age;
+    }
+
+    public void setCouleur(Couleur couleur) {
+        this.couleur = couleur;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    public String getNom() {
+        return nom;
+    }
+    public Materiaux getCout() {
+        return cout;
+    }
+
+    public void setCout(Materiaux cout) {
+        this.cout = cout;
+    }
+
+    public void setPointsVictoire(int pointsVictoire) {
+        this.pointsVictoire = pointsVictoire;
+    }
+
     public Couleur getCouleur() {
         return couleur;
-    }
-    
-    public int getId() {
-        return id;
-    }
-
-    public int getpoints() {
-        return points;
-    }
-
-    @Override
-    public String toString() {
-        return  "Age:" + this.age+ " - Couleur: "+this.couleur+" " + "- "+ "MATERIAUX: "+this.cout+ " - " + "ID: "+this.id+" - "+ "Nom: "+this.nom+" - "+ "Points: "+this.points;
-
     }
 
 }

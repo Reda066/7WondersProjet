@@ -3,24 +3,27 @@ package joueur;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
+import jeu.Carte;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class Client {
 
   // Objet de synchro
-  final Object attenteDéconnexion = new Object();
+  final Object attenteDeconnexion = new Object();
   Socket connexion;
   // On le crée ici donc le joueur ? plus besoin de cette class
   public Client(){
     // Joueur sans connexion
   };
-
-  public String getConnexionId() {
-    return connexion.id();
-  }
-
   public Client(String urlServeur) {
 
     try {
@@ -36,20 +39,18 @@ public class Client {
       connexion.on("connect", new Emitter.Listener() {
         @Override
         public void call(Object... objects) {
-          System.out.println("[CLIENT " + connexion.id() + "] Je suis connecte au serveur");
-          //ping_du_client();
         }
       });
 
       connexion.on("disconnect", new Emitter.Listener() {
         @Override
         public void call(Object... objects) {
-          System.out.println("[CLIENT " + connexion.id() + "] Je me deconnecte");
+          System.out.println("[CLIENT " + connexion.id() + "] Je me suis fait déconnecté");
           connexion.disconnect();
           connexion.close();
 
-          synchronized (attenteDéconnexion) {
-            attenteDéconnexion.notify();
+          synchronized (attenteDeconnexion) {
+            attenteDeconnexion.notify();
           }
         }
       });
@@ -78,9 +79,9 @@ public class Client {
     connexion.connect();
 
     System.out.println("[CLIENT " + connexion.id() + "] En attente de déconnexion");
-    synchronized (attenteDéconnexion) {
+    synchronized (attenteDeconnexion) {
       try {
-        attenteDéconnexion.wait();
+        attenteDeconnexion.wait();
       } catch (InterruptedException e) {
         e.printStackTrace();
         System.err.println("[CLIENT " + connexion.id() + "] Erreur dans l'attente");
