@@ -4,12 +4,10 @@ import io.socket.client.IO;
 import io.socket.emitter.Emitter;
 import jeu.Carte;
 import jeu.Merveille;
-import jeu.controlleur.*;
+import jeu.gestion.*;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -62,7 +60,7 @@ public class Joueur extends Client {
       @Override
       public void call(Object... o) {
         System.out.println("[CLIENT "+id().toString()+"] Réception de la merveille "+o[0]);
-        setMerveille(ControlleurMerveille.getMerveilleById((Integer)o[0]));
+        setMerveille(gestionMerveille.getMerveilleById((Integer)o[0]));
       }
     });
     connexion.on("reception_cartes", new Emitter.Listener() {
@@ -94,7 +92,7 @@ public class Joueur extends Client {
     cartesEnMain = new ArrayList<Carte>(){};
     for (int i = 0; i < ids.length(); i++) {
       try {
-        ajouterCarteEnMain(ControlleurCarte.getCarteById(ids.getInt(i)));
+        ajouterCarteEnMain(gestionCarte.getCarteById(ids.getInt(i)));
       } catch (JSONException e) {
         e.printStackTrace();
         return false;
@@ -150,7 +148,7 @@ public class Joueur extends Client {
   }
 
   public Merveille setMerveille(int id) {
-    return this.merveille = ControlleurMerveille.getMerveilleById(id);
+    return this.merveille = gestionMerveille.getMerveilleById(id);
   }
   public void setCartesEnMain(ArrayList<Carte> cartes){
     cartesEnMain = cartes;

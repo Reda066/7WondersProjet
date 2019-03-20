@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Cartetest {
     void testcarte() {
         ArrayList<Carte> cartes = new ArrayList<Carte>();
-        cartes.add(new Carte(Age.I, Couleur.BLEU, Materiaux.MINERAI,1,"f",2));
+        cartes.add(new Carte(Age.I, Couleur.GRIS, "Metier à tisser", 1, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
         int p = 2;
         String a = "Batiment";
         for (Carte c : cartes) {

@@ -4,7 +4,7 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.DataListener;
 import joueur.*;
-import jeu.controlleur.*;
+import jeu.gestion.*;
 
 import java.util.*;
 
@@ -35,7 +35,7 @@ public class Partie {
 
                 for (int i = 0; i < joueurs.size(); i++) {
                   if(joueurs.get(i).id().equals(client.getSessionId())){
-                    joueurs.get(i).poserUneCarte(ControlleurCarte.getCarteById(c));
+                    joueurs.get(i).poserUneCarte(gestionCarte.getCarteById(c));
                     return;
                   }
               }
@@ -57,7 +57,7 @@ public class Partie {
 
     // Donne les merveilles de maniière aléatoire dès le début du jeu à un joueur
     public boolean distribuer_merveille(){
-        ArrayList<Merveille> merveilles = new ControlleurMerveille().getAleaMerveilles(joueurs.size());
+        ArrayList<Merveille> merveilles = new gestionMerveille().getAleaMerveilles(joueurs.size());
         if(merveilles==null) return false;
         for (int i=0; i< joueurs.size();i++){
             joueurs.get(i).setMerveille(merveilles.get(i));
@@ -81,7 +81,7 @@ public class Partie {
 
     public boolean distribuer_cartes(){
 
-        ArrayList<Carte> cartes = new ControlleurCarte().getAleaCartes(joueurs.size(),age);
+        ArrayList<Carte> cartes = new gestionCarte().getAleaCartes(joueurs.size(),age);
         int tabId [];
         int index=0;
         if(cartes==null) return false;

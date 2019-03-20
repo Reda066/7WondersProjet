@@ -1,12 +1,11 @@
-package jeu.controlleur;
+package jeu.gestion;
 import jeu.Merveille;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
-public class ControlleurMerveille {
+public class gestionMerveille {
 
-  public ControlleurMerveille(){}
+  public gestionMerveille(){}
 
   public static Merveille getMerveilleById(int id)
   {
