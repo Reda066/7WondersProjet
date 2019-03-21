@@ -32,10 +32,9 @@
 
 ## Livraison 6
 
-- Choisir du nombre de joueurs
-- Prise en comptes des cartes en fonctions du nombre de joueurs
+- Création des cartes de l'age 2
+- Implémenter les contraintes entre les cartes
 
 ## Livraison 7
 
-- Ajouter des guildes
-- Ajouter des bâtiments scientifiques
+- Création d'une stratégie par joueur
