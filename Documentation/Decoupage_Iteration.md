@@ -22,13 +22,13 @@
 
 ## Livraison 4
 
-- Intégrer le score
 - Corriger le nom des joueurs dans la sortie
 - Création des réelles carte de l'age 1
 
 ## Livraison 5
 
 - Distribution Pièces de monaie
+- Intégrer le score
 
 ## Livraison 6
 
