@@ -36,12 +36,12 @@ public class Lanceur {
       }
     });
 
+
+    serveur.start();
     c1.start();
     c2.start();
     c3.start();
 
-
-    serveur.start();
 
   }
 }

@@ -3,7 +3,6 @@ import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.DataListener;
-import joueur.*;
 import jeu.gestion.*;
 
 import java.util.*;
@@ -24,12 +23,12 @@ public List<Participant> getJoueurs() {
     public Partie(SocketIOServer s){
         serveur = s;
 
-
-        serveur.addEventListener("jai_pose_une_carte", String.class, new DataListener<String>() {
+// Ajout d'un événement poser une carte
+        serveur.addEventListener("poserCarte", String.class, new DataListener<String>() {
             public void onData(SocketIOClient client, String nom_carte, AckRequest ackRequest) {
 
 
-              System.out.println("[SERVEUR][PARTIE] "+ get_joueur_by_id(client.getSessionId()).getNom() + " a posé la carte <" +nom_carte+">");
+              System.out.println("[SERVEUR][PARTIE] "+ get_joueur_by_id(client.getSessionId()).getNom() + " a posé la carte '" +nom_carte+"'");
 
                 for (int i = 0; i < joueurs.size(); i++) {
                   if(joueurs.get(i).id().equals(client.getSessionId())){
@@ -42,8 +41,8 @@ public List<Participant> getJoueurs() {
                 }
             }
         });
-
-        serveur.addEventListener("jai_defausser_une_carte", String.class, new DataListener<String>() {
+// Ajout d'un événement defausser carte
+        serveur.addEventListener("defausserCarte", String.class, new DataListener<String>() {
             public void onData(SocketIOClient client, String nom_carte, AckRequest ackRequest) {
 
                 ArrayList <Integer> repet=get_joueur_by_id(client.getSessionId()).getMateriauxProduite().getListeMateriaux();
@@ -72,21 +71,22 @@ public List<Participant> getJoueurs() {
             }
         });
 
-
-      serveur.addEventListener("jai_fini_mes_actions", boolean.class, new DataListener<Boolean>() {
+// Ajout d'un événement fin d'action
+      serveur.addEventListener("finAction", boolean.class, new DataListener<Boolean>() {
         public void onData(SocketIOClient client, Boolean c, AckRequest ackRequest) throws Exception {
-          System.out.println("[SERVEUR][PARTIE] Le client "+get_joueur_by_id(client.getSessionId()).getNom() + " a finis ses actions");
+          System.out.println("[SERVEUR][PARTIE] "+get_joueur_by_id(client.getSessionId()).getNom() + " a terminé son tour");
           for (Participant j: joueurs){
               if(j.id().equals(client.getSessionId())){
                 j.fins_actions=true;
                 break;
               }
           }
+          //Déclarage de la fin de l age si le nombre de carte en main = 0
           if(finAgeCourant()){
-            System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+            System.out.println("-----------------------------------------------------------------------");
             System.out.println("[SERVEUR][PARTIE] FIN DE L'AGE "+age);
 
-
+          // le jeu continue si le nb de carte en main != 0
           }else if (finDeTousLesActionsDesJoueurs()){
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> FIN DU TOUR N°"+nb_tours+" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
             nb_tours++;
@@ -98,11 +98,6 @@ public List<Participant> getJoueurs() {
           }
           }
       });
-    }
-
-
-    public ArrayList<Carte> getDefausse() {
-        return defausse;
     }
 
     public boolean finAgeCourant(){
@@ -131,15 +126,11 @@ public List<Participant> getJoueurs() {
         return null;
     }
 
-    public void retirer_joueur(Joueur j){
-        joueurs.remove(j);
-    }
-
   public void decouvrir_voisins(){
     for(Participant p : joueurs){
-      p.voisin_de_droite=voisin(p.getRang(),false);
-      p.voisin_de_gauche=voisin(p.getRang(),true);
-      serveur.getClient(p.id()).sendEvent("decouvrir_voisins",voisin(p.getRang(),false),voisin(p.getRang(),true));
+      p.voisinDroite =voisin(p.getRang(),false);
+      p.voisinGauche =voisin(p.getRang(),true);
+      serveur.getClient(p.id()).sendEvent("decouvrirVoisin",voisin(p.getRang(),false),voisin(p.getRang(),true));
     }
   }
     public void distribuer_merveille(){
@@ -149,9 +140,9 @@ public List<Participant> getJoueurs() {
         else face=Face.B;
         for (int i=0; i< joueurs.size();i++){
             joueurs.get(i).setMerveille(merveilles.get(i));
-            serveur.getClient(joueurs.get(i).id()).sendEvent("reception_merveille",merveilles.get(i).getNom(),merveilles.get(i).getFace());
+            serveur.getClient(joueurs.get(i).id()).sendEvent("receptionMerveille",merveilles.get(i).getNom(),merveilles.get(i).getFace());
             System.out.println("[SERVEUR][PARTIE] Affectation de la merveille <"+merveilles.get(i).getNom() +"> Face "+merveilles.get(i).cote+ " au joueur nommé "+joueurs.get(i).getNom());
-            // emit au serveur au joueur x la merveille y
+
         }
     }
 
@@ -166,8 +157,8 @@ public List<Participant> getJoueurs() {
         return true;
       j.fins_actions=false;
       j.setCartesEnMain(cartes);
-      System.out.println("[SERVEUR][PARTIE] Envoi des cartes au joueur "+j.getRang());
-      serveur.getClient(j.id()).sendEvent("reception_cartes",j.getCartesEnMain());
+      System.out.println("[SERVEUR][PARTIE] Envoi des cartes au joueur "+j.getNom());
+      serveur.getClient(j.id()).sendEvent("receptionCarte",j.getCartesEnMain());
       decouvrir_voisins();
       return true;
     }
@@ -184,31 +175,20 @@ public List<Participant> getJoueurs() {
 
         for(Participant j : joueurs){
           System.out.println("[SERVEUR][PARTIE] Envoi des cartes au joueur"+j.getRang());
-           serveur.getClient(j.id()).sendEvent("reception_cartes",j.getCartesEnMain());
+           serveur.getClient(j.id()).sendEvent("receptionCarte",j.getCartesEnMain());
         }
       decouvrir_voisins();
 
     }
 
-    public void donner_gold(){
-        for(Participant j : joueurs){
-            j.getMateriauxProduite().getListeMateriaux().set(0, j.getMateriauxProduite().getListeMateriaux().get(0).intValue() + 3);
-            System.out.println("[SERVEUR][PARTIE] Ajout des 3 golds comme initialisation au joueur "+j.getNom());
-            serveur.getClient(j.id()).sendEvent("ajout_gold",j.getMateriauxProduite());
-        }
-    }
 
-    public void ajouterGold(Participant j, int a){
-        j.getMateriauxProduite().getListeMateriaux().set(0, j.getMateriauxProduite().getListeMateriaux().get(0).intValue() + a);
-        serveur.getClient(j.id()).sendEvent("ajout_gold",j.getMateriauxProduite());
-    }
     public void commencer(){
 
       System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> Démarrage de la partie <<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
       distribuer_merveille();
       distribuer_cartes();
 
-      donner_gold();
+
 
       serveur.getBroadcastOperations().sendEvent("debut_partie");
       System.out.println("[SERVEUR][PARTIE] La partie commence !");

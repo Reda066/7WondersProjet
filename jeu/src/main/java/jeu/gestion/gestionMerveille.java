@@ -4,6 +4,7 @@ import jeu.Merveille;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+//C'est ici qu'on créé les merveilles
 
 public class gestionMerveille {
   public gestionMerveille(){}
@@ -48,6 +49,7 @@ public class gestionMerveille {
         return m;
     return null;
   }
+//Obtenir une merveille aléatoirement
   public ArrayList<Merveille> getAleaMerveilles(int nb){
     ArrayList<Merveille> merveilles = getMerveilles();
     Collections.shuffle(merveilles);
@@ -55,10 +57,5 @@ public class gestionMerveille {
     return merveilles;
   }
 
-  public ArrayList<Merveille> getAleaMerveilles(){
-    ArrayList<Merveille> merveilles = getMerveilles();
-    Collections.shuffle(merveilles);
-    return merveilles;
-  }
 
 }

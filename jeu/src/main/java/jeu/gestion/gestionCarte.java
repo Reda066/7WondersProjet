@@ -8,16 +8,16 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.Collections;
 
+//C'est ici qu'on créé les cartes en fonction de l'age pour l'instant nous disposons seulement de l'age 1
+
 public class gestionCarte {
-  public gestionCarte() {
-  }
 
   public ArrayList<Carte> getCartes(int nb_joueurs, Age a) {
     ArrayList<Carte> cartes = new ArrayList<Carte>() {
     };
 
     if (a.equals(Age.I)) {
-      if (nb_joueurs >= 3) {
+
 
         /*-------------------------------------------------------------------------BLEU----------------------------------------------------------------------------*/
         cartes.add(new Carte(Age.I, Couleur.BLEU, "Autel", 2, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
@@ -49,18 +49,18 @@ public class gestionCarte {
         cartes.add(new Carte(Age.I, Couleur.GRIS, "Presse", 3, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
         cartes.add(new Carte(Age.I, Couleur.GRIS, "Metier à tisser", 1, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
 
-      }
+
+    }
+
+    //Prochaine itération
+    if (a.equals(Age.II)) {
+
     }
 
     return cartes;
   }
 
-  public ArrayList<Carte> getCartes(int nb, Age a, JSONArray cartes) {
-    System.out.println(cartes);
-    return new ArrayList<Carte>() {
-    };
-  }
-
+// obtention des cartes de façon aléatoire grace à la methode shuffle
   public ArrayList<Carte> getAleaCartes(int nb, Age a) {
     ArrayList<Carte> cartes = getCartes(nb, a);
     Collections.shuffle(cartes);

@@ -17,7 +17,6 @@ public class Serveur {
   Partie partie;
 
   public Serveur(Configuration config) {
-    // creation du serveur
     serveur = new SocketIOServer(config);
     partie = new Partie(serveur);
 
@@ -35,7 +34,7 @@ public class Serveur {
     System.out.println("[SERVEUR] Initialisation et création des écouteurs d'évenements");
     serveur.addConnectListener(new ConnectListener() {
       public void onConnect(SocketIOClient client) {
-        System.out.println("[SERVEUR] Un nouveau client s'est connecté.");
+        System.out.println("[SERVEUR] Connexion d'un nouveau client.");
       }
     });
   }
@@ -58,7 +57,7 @@ public class Serveur {
   }
   private void demarrer() {
     serveur.start();
-    System.out.println("[SERVEUR] Serveur démarré, en attente des clients pour se connecter.");
+    System.out.println("[SERVEUR] Le serveur est démarré.");
   }
 
 }

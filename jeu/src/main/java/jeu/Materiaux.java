@@ -21,7 +21,4 @@ public class Materiaux {
         return listeMateriaux;
     }
 
-    public void setListeMateriaux(ArrayList<Integer> listeMateriaux) {
-        this.listeMateriaux = listeMateriaux;
-    }
-}
+   }

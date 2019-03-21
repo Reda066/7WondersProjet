@@ -32,12 +32,6 @@ public class Merveille {
         return nom;
     }
     public Face getFace(){return this.cote;}
-    public void setFace(Face face) {
-         this.cote=face;
-    }
-    public void setNbEtages(int nbEtapes) {
-        this.etages = nbEtapes;
-    }
 
-    // LE NOMBRE D'ETAPE ME PERMET JUSTE DE VERIFIER QUE L'ON CHANGE BIEN LA FACE DE LA MERVEILLE
+
 }

@@ -11,7 +11,6 @@ import jeu.gestion.*;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class Joueur {
 
@@ -21,38 +20,24 @@ public class Joueur {
   protected Merveille merveille;
   protected Materiaux materiauxProduite;
 
-  protected boolean sans_connexion = false;
-  protected int rang;
-  protected UUID id_affecte;
+
   public boolean fins_actions = false;
-  // Objet de synchr
   final Object attenteDeconnexion = new Object();
   Socket connexion;
 
-  protected Participant voisin_de_droite;
-  protected Participant voisin_de_gauche;
-
-
-  public int getRang() {
-    return rang;
-  }
-
-  public void setRang(int rang) {
-      this.rang = rang;
-  }
-  // On le crée ici donc le joueur ? plus besoin de cette class
+  protected Participant voisinDroite;
+  protected Participant voisinGauche;
 
   public Joueur(String nom ,String urlServeur) {
 
     try {
-      // il fallait rajouter ça enfaite
       IO.Options opts = new IO.Options();
       opts.forceNew = true;
       this.nom = nom;
       connexion = IO.socket(urlServeur, opts);
 
 
-      System.out.println("[JOUEUR] " + getNom() + " : Je prépare mes écouteurs");
+      System.out.println("[JOUEUR] " + getNom() + " : Préparation des écouteurs");
 
       connexion.on("connect", new Emitter.Listener() {
         @Override
@@ -73,31 +58,23 @@ public class Joueur {
           }
         }
       });
-      connexion.on("decouvrir_voisins", new Emitter.Listener() {
+      connexion.on("decouvrirVoisin", new Emitter.Listener() {
         @Override
         public void call(Object... o) {
           Gson gson=new Gson();
-          voisin_de_droite = gson.fromJson(o[0].toString(),Participant.class);
-          voisin_de_gauche = gson.fromJson(o[1].toString(),Participant.class);
+          voisinDroite = gson.fromJson(o[0].toString(),Participant.class);
+          voisinGauche = gson.fromJson(o[1].toString(),Participant.class);
         }
       });
 
-      connexion.on("ajout_gold", new Emitter.Listener() {
-        @Override
-        public void call(Object... o) {
-          Gson gson=new Gson();
-          Materiaux materiaux = gson.fromJson(o[0].toString(), Materiaux.class);
-          setMateriauxProduite(materiaux);
-        }
-      });
-      connexion.on("reception_merveille", new Emitter.Listener() {
+      connexion.on("receptionMerveille", new Emitter.Listener() {
         @Override
         public void call(Object... o) {
           Merveille m =new gestionMerveille().getMerveille((String) o[0],o[1]=="A"?Face.A:Face.B);
           setMerveille(m);
         }
       });
-      connexion.on("reception_cartes", new Emitter.Listener() {
+      connexion.on("receptionCarte", new Emitter.Listener() {
         @Override
         public void call(Object... o) {
           Boolean posable=false;
@@ -113,11 +90,7 @@ public class Joueur {
           for(int g=0;g<merveille.getCartesPose().size();g++){
               if(!(cartesEnMain.get(index_carte_choisi).getNom().equals(merveille.getCartesPose().get(g).getNom()))){
                 //Contrôle du cout de la carte
-                while(z!= getMateriauxProduite().getListeMateriaux().size()){
-                  if (cartesEnMain.get(index_carte_choisi).getCout().getListeMateriaux().get(z) > getMateriauxProduite().getListeMateriaux().get(z)) cout=false;
-                  // A mettre dans des méthodes car on pourra les réutiliser
-                  z++;
-                }
+                
                 if(cout) {
                   index_carte_choisi = g;
                   posable = true;
@@ -129,7 +102,7 @@ public class Joueur {
 
           Carte carte_choisi = cartesEnMain.get(index_carte_choisi);
           if(posable = true) {
-            connexion.emit("jai_pose_une_carte", carte_choisi.getNom());
+            connexion.emit("poserCarte", carte_choisi.getNom());
             poserUneCarte(cartesEnMain.get(index_carte_choisi));
           }
           else {
@@ -145,13 +118,8 @@ public class Joueur {
 
   }
 
-  /*public void ping_du_client() {
-    System.out.println("[CLIENT] J'envoie un ping au serveur ==> [SERVEUR]");
-    connexion.emit("reception_ping_du_client", 0);
-  }*/
 
   public void seConnecter() {
-    // on se connecte
     connexion.connect();
 
     System.out.println("[JOUEUR] "+getNom()+" : En attente de déconnexion");
@@ -195,46 +163,17 @@ public void defausserUneCarte(Carte c){
       break;
     }
   }
-  connexion.emit("jai_defausser_une_carte", c.getNom());
+  connexion.emit("defausserCarte", c.getNom());
 }
   public void declarerFinActions(){
     fins_actions=true;
-    connexion.emit("jai_fini_mes_actions",true);
+    connexion.emit("finAction",true);
 
-  }
-  public ArrayList<Carte> getCartesEnMain() {
-    return cartesEnMain;
-  }
-
-  public void ajouterCarteEnMain(Carte c) {
-    this.cartesEnMain.add(c);
   }
 
   public String getNom() {
     return nom;
   }
 
-  public void setNom(String nom) {
-    this.nom = nom;
-  }
-
-  public UUID id() {
-    if(this.sans_connexion)
-      return this.id_affecte;
-
-    return UUID.fromString(this.connexion.id());
-  }
-
-  public void setCartesEnMain(ArrayList<Carte> cartes){
-    cartesEnMain = cartes;
-  }
-
-  public int calculerScore(){
-    int score =0;
-    ArrayList<Carte> cartes = merveille.getCartesPose();
-    for (int i = 0; i <cartes.size(); i++)
-      score+=cartes.get(i).getPointsVictoire();
-    return score;
-  }
 
 }

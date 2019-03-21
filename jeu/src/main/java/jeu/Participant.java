@@ -8,7 +8,7 @@ public class Participant {
 
   protected ArrayList<Carte> cartesEnMain = new ArrayList<Carte>(){};
 
-  protected String nom = "Non-identifié";
+  protected String nom = "Inconnu";
 
   protected Merveille merveille;
 
@@ -18,8 +18,8 @@ public class Participant {
 
   protected UUID id;
 
-  protected Participant voisin_de_droite;
-  protected Participant voisin_de_gauche;
+  protected Participant voisinDroite;
+  protected Participant voisinGauche;
 
   public boolean fins_actions=false;
 
@@ -73,18 +73,7 @@ public class Participant {
     cartesEnMain = cartes;
   }
 
-  public int calculerScore(){
-    int score =0;
-    ArrayList<Carte> cartes = merveille.getCartesPose();
-    for (int i = 0; i <cartes.size(); i++)
-      score+=cartes.get(i).getPointsVictoire();
-    return score;
-  }
-
   public void ajouterOr(int nb){
     getMateriauxProduite().getListeMateriaux().set(0, getMateriauxProduite().getListeMateriaux().get(0).intValue() + nb);
-  }
-  public Merveille getMerveille() {
-    return merveille;
   }
 }
