@@ -37,4 +37,4 @@
 
 ## Livraison 7
 
-- Création d'une stratégie par joueur
+- Création d'une stratégie par joueur (IA)
