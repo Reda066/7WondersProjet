@@ -29,6 +29,9 @@
 
 - Distribution Pièces de monaie
 - Intégrer le score
+- Rajouter la possibilité de rajouter plus de joueurs
+- Rajouter des cartes de l'age 1 en fonction du nombre de joueur (ex : si 4 joueurs seul un certain
+nombre de carte sera disponible, ect...)
 
 ## Livraison 6
 
