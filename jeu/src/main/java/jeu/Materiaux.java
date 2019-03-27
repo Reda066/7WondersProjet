@@ -6,8 +6,8 @@ public class Materiaux {
 
     protected ArrayList<Integer> listeMateriaux = new ArrayList<Integer>(){};
 
-    public Materiaux(int monnaie, int pierre, int bois, int argile, int minerai, int textile, int papyrus, int verre) {
-        listeMateriaux.add(monnaie);
+    public Materiaux(int or, int pierre, int bois, int argile, int minerai, int textile, int papyrus, int verre) {
+        listeMateriaux.add(or);
         listeMateriaux.add(pierre);
         listeMateriaux.add(bois);
         listeMateriaux.add(argile);
@@ -19,6 +19,10 @@ public class Materiaux {
 
     public ArrayList<Integer> getListeMateriaux() {
         return listeMateriaux;
+    }
+
+    public int getOr(){
+        return getListeMateriaux().get(0);
     }
 
    }

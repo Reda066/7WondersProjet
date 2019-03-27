@@ -38,6 +38,8 @@ public class Participant {
     return materiauxProduite;
   }
 
+
+
   public void setMerveille(Merveille merveille) {
     this.merveille = merveille;
   }
@@ -75,5 +77,13 @@ public class Participant {
 
   public void ajouterOr(int nb){
     getMateriauxProduite().getListeMateriaux().set(0, getMateriauxProduite().getListeMateriaux().get(0).intValue() + nb);
+  }
+
+  public int Score(){
+    int score =0;
+    ArrayList<Carte> cartes = merveille.getCartesPose();
+    for (int i = 0; i <cartes.size(); i++)
+      score+=cartes.get(i).getPointsVictoire();
+    return score;
   }
 }

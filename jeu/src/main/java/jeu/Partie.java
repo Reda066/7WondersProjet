@@ -85,6 +85,7 @@ public List<Participant> getJoueurs() {
           if(finAgeCourant()){
             System.out.println("-----------------------------------------------------------------------");
             System.out.println("[SERVEUR][PARTIE] FIN DE L'AGE "+age);
+            afficherScores();
 
           // le jeu continue si le nb de carte en main != 0
           }else if (finDeTousLesActionsDesJoueurs()){
@@ -99,6 +100,21 @@ public List<Participant> getJoueurs() {
           }
       });
     }
+
+    public void afficherScores(){
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("[SERVEUR][PARTIE] LES SCORES SONT : ");
+        int max_index = 0;
+        for (int i = 0; i < joueurs.size(); i++) {
+            Participant j = joueurs.get(i);
+            if(j.Score()>=joueurs.get(max_index).Score())
+                max_index=i;
+            System.out.println(j.getNom()+" : "+j.Score()+" points et de "+j.getMateriauxProduite().getOr()+" or");
+        }
+        System.out.println("Le joueur gagnant est  "+joueurs.get(max_index).getNom()+" avec "+joueurs.get(max_index).Score()+" Points");
+
+    }
+
 
     public boolean finAgeCourant(){
       for (Participant j: joueurs){
