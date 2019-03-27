@@ -67,6 +67,14 @@ public class Joueur {
         }
       });
 
+      connexion.on("ajoutGold", new Emitter.Listener() {
+        @Override
+        public void call(Object... o) {
+          Gson gson=new Gson();
+          Materiaux materiaux = gson.fromJson(o[0].toString(), Materiaux.class);
+          setMateriauxProduite(materiaux);
+        }
+      });
       connexion.on("receptionMerveille", new Emitter.Listener() {
         @Override
         public void call(Object... o) {
@@ -90,7 +98,10 @@ public class Joueur {
           for(int g=0;g<merveille.getCartesPose().size();g++){
               if(!(cartesEnMain.get(index_carte_choisi).getNom().equals(merveille.getCartesPose().get(g).getNom()))){
                 //Contrôle du cout de la carte
-                
+                while(z!= getMateriauxProduite().getListeMateriaux().size()){
+                  if (cartesEnMain.get(index_carte_choisi).getCout().getListeMateriaux().get(z) > getMateriauxProduite().getListeMateriaux().get(z)) cout=false;
+                                   z++;
+                }
                 if(cout) {
                   index_carte_choisi = g;
                   posable = true;

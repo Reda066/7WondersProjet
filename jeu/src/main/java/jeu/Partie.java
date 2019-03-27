@@ -181,15 +181,20 @@ public List<Participant> getJoueurs() {
 
     }
 
+    public void donner_gold(){
+        for(Participant j : joueurs){
+            j.getMateriauxProduite().getListeMateriaux().set(0, j.getMateriauxProduite().getListeMateriaux().get(0).intValue() + 3);
+            System.out.println("[SERVEUR][PARTIE] Le joueur "+j.getNom()+" reçoit 3 golds");
+            serveur.getClient(j.id()).sendEvent("ajoutGold",j.getMateriauxProduite());
+        }
+    }
 
     public void commencer(){
 
       System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> Démarrage de la partie <<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
       distribuer_merveille();
       distribuer_cartes();
-
-
-
+      donner_gold();
       serveur.getBroadcastOperations().sendEvent("debut_partie");
       System.out.println("[SERVEUR][PARTIE] La partie commence !");
 
