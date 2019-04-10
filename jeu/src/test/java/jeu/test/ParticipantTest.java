@@ -10,12 +10,12 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParticipantTest {
-Participant participant;
-Carte c1, c2;
-Materiaux materiauxProduite;
-ArrayList<Carte> carteEnMain;
+    Participant participant;
+    Carte c1, c2;
+    Materiaux materiauxProduite;
+    ArrayList<Carte> carteEnMain;
 
-Merveille m;
+    Merveille m;
 
     @BeforeEach
     void setUp() {
@@ -76,7 +76,7 @@ Merveille m;
         System.out.println("Les cartes "+c1.getNom()+" et "+c2.getNom() +" ont bien été ajoutées à la main");
     }
 
-     @Test
+    @Test
     void score() {
         this.participant.merveille = m;
         this.carteEnMain.add(c1);
@@ -90,7 +90,7 @@ Merveille m;
 
         assertEquals(4, this.participant.score());
 
-         System.out.println("------------------TEST SCORE------------------");
-         System.out.println("Le score est bien attribuée ici il est de : "+this.participant.score());
+        System.out.println("------------------TEST SCORE------------------");
+        System.out.println("Le score est bien attribuée ici il est de : "+this.participant.score());
     }
 }

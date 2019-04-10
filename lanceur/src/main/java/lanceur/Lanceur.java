@@ -1,4 +1,8 @@
 package lanceur;
+import jeu.Strategie;
+import joueur.Alchimiste;
+import joueur.Batiment;
+import joueur.Guerrier;
 import joueur.Joueur;
 import serveur.Serveur;
 
@@ -17,21 +21,21 @@ public class Lanceur {
     Thread c1 = new Thread(new Runnable() {
       @Override
       public void run() {
-        Joueur c = new Joueur("Ciella",url);
+        Joueur c = new Guerrier("Ciella", url);
         c.seConnecter();
       }
     });
     Thread c2 = new Thread(new Runnable() {
       @Override
       public void run() {
-        Joueur c = new Joueur("Ines",url);
+        Joueur c = new Alchimiste("Ines",url);
         c.seConnecter();
       }
     });
     Thread c3 = new Thread(new Runnable() {
       @Override
       public void run() {
-        Joueur c = new Joueur("Reda",url);
+        Joueur c = new Batiment("Reda",url);
         c.seConnecter();
       }
     });

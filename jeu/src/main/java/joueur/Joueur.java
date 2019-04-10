@@ -21,6 +21,8 @@ public class Joueur {
   protected Materiaux materiauxProduite;
 
 
+
+
   public boolean fins_actions = false;
   final Object attenteDeconnexion = new Object();
   Socket connexion;
@@ -158,6 +160,50 @@ public class Joueur {
     this.merveille = merveille;
   }
 
+
+  /*public void poserUneCarte(Carte c){
+    switch (strategie){
+      case GUERRE:
+        for (int i = 0; i < cartesEnMain.size(); i++){
+          if(this.cartesEnMain.get(i).getCouleur().equals(Couleur.ROUGE)){
+            cartesEnMain.remove(i);
+            break;
+          }
+          merveille.poserUneCarte(c);
+        }
+        break;
+
+      case ALCHIMISTE:
+        for (int i = 0; i < cartesEnMain.size(); i++){
+          if(this.cartesEnMain.get(i).getCouleur().equals(Couleur.VERT)){
+            cartesEnMain.remove(i);
+            break;
+          }
+          merveille.poserUneCarte(c);
+        }
+        break;
+
+      case BATIMENT:
+        for (int i = 0; i < cartesEnMain.size(); i++){
+          if(this.cartesEnMain.get(i).getCouleur().equals(Couleur.BLEU)){
+            cartesEnMain.remove(i);
+            break;
+          }
+          merveille.poserUneCarte(c);
+        }
+        break;
+
+    }
+    for (int i = 0; i < cartesEnMain.size(); i++) {
+      if(cartesEnMain.get(i).equals(c)){
+        cartesEnMain.remove(i);
+        break;
+      }
+    }
+    merveille.poserUneCarte(c);
+  }*/
+
+
   public void poserUneCarte(Carte c){
    for (int i = 0; i < cartesEnMain.size(); i++) {
       if(cartesEnMain.get(i).equals(c)){
@@ -167,13 +213,16 @@ public class Joueur {
     }
     merveille.poserUneCarte(c);
   }
+
 public void defausserUneCarte(Carte c){
+
   for (int i = 0; i < cartesEnMain.size(); i++) {
     if(cartesEnMain.get(i).equals(c)){
       cartesEnMain.remove(i);
       break;
     }
   }
+
   connexion.emit("defausserCarte", c.getNom());
 }
   public void declarerFinActions(){

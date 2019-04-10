@@ -20,11 +20,11 @@ class carteTest {
   @Test
   void testcarte() {
 
-  String title = "Autel";
-  assert carte.getNom().equals(title);
+    String title = "Autel";
+    assert carte.getNom().equals(title);
 
-  int points = 2;
-  assert carte.getPointsVictoire() == points;
+    int points = 2;
+    assert carte.getPointsVictoire() == points;
 
 
     System.out.println("------------------TEST CARTE------------------");

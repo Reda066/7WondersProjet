@@ -29,7 +29,7 @@ public class MerveilleTest {
     @Test
     void testmerveille() {
 
-         this.m = new Merveille("ALEXANDRIA",  Face.A, 3, 0);
+        this.m = new Merveille("ALEXANDRIA",  Face.A, 3, 0);
 
         Face face = Face.A;
         assert m.getFace().equals(face);

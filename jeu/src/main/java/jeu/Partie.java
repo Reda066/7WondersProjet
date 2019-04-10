@@ -90,6 +90,7 @@ public List<Participant> getJoueurs() {
           // le jeu continue si le nb de carte en main != 0
           }else if (finDeTousLesActionsDesJoueurs()){
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> FIN DU TOUR N°"+nb_tours+" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
             nb_tours++;
               ArrayList<Carte> temp =  joueurs.get(joueurs.size()-1).getCartesEnMain();
               for (int i = joueurs.size()-1; i >0 ; i--) {
@@ -213,6 +214,7 @@ public List<Participant> getJoueurs() {
       donner_gold();
       serveur.getBroadcastOperations().sendEvent("debut_partie");
       System.out.println("[SERVEUR][PARTIE] La partie commence !");
+      System.out.println("________________________ DEBUT DU TOUR N°1 ________________________");
 
     }
 }
