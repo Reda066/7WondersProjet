@@ -96,9 +96,84 @@ public class gestionCarte {
 
 
     //Prochaines itérations
-    if (a.equals(Age.II)) {
+      if (a.equals(Age.II)) {
+          if (nb_joueurs >= 3) {
+              ///BLEU
+              cartes.add(new Carte(Age.II, Couleur.BLEU, "Temple", 3, new Materiaux(0, 0, 1, 1, 0, 0, 0, 1)));
+              cartes.add(new Carte(Age.II, Couleur.BLEU, "Tribunal", 4, new Materiaux(0, 0, 0, 2, 0, 1, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.BLEU, "Statue", 4, new Materiaux(0, 0, 1, 0, 2, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.BLEU, "Aqueduc", 5, new Materiaux(0, 3, 0, 0, 0, 0, 0, 0)));
 
-    }
+              //ROUGE
+              cartes.add(new Carte(Age.II, Couleur.ROUGE, "Muraille", 0, new Materiaux(0, 3, 0, 0, 0, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.ROUGE, "Ecuries", 0, new Materiaux(0, 0, 1, 1, 1, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.ROUGE, "Champs de tir", 0, new Materiaux(0, 0, 2, 0, 1, 0, 0, 0)));
+
+
+              //JAUNE
+              cartes.add(new Carte(Age.II, Couleur.JAUNE, "Forum", 0, new Materiaux(0, 0, 0, 2, 0, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.JAUNE, "Vignoble", 0, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.JAUNE, "Caravanserail", 0, new Materiaux(0, 0, 2, 0, 0, 0, 0, 0)));
+
+              //VERT
+              cartes.add(new Carte(Age.II, Couleur.VERT, "Dispensaire", 0, new Materiaux(0, 0, 0, 0, 2, 0, 0, 1)));
+              cartes.add(new Carte(Age.II, Couleur.VERT, "Laboratoire", 0, new Materiaux(0, 0, 0, 2, 0, 0, 1, 0)));
+              cartes.add(new Carte(Age.II, Couleur.VERT, "Bibliotheque", 0, new Materiaux(0, 2, 0, 0, 0, 1, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.VERT, "Ecole", 0, new Materiaux(0, 0, 1, 0, 0, 0, 1, 0)));
+
+              //MARRON
+              cartes.add(new Carte(Age.II, Couleur.MARRON, "Carriere", 0, new Materiaux(1, 0, 0, 0, 0, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.MARRON, "Scierie", 0, new Materiaux(1, 0, 0, 0, 0, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.MARRON, "Fonderie", 0, new Materiaux(1, 0, 0, 0, 0, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.MARRON, "Briqueterie", 0, new Materiaux(1, 0, 0, 0, 0, 0, 0, 0)));
+              //GRIS
+              cartes.add(new Carte(Age.II, Couleur.GRIS, "Verrerie", 0, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.GRIS, "Presse", 0, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.GRIS, "Metier à tisser", 0, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
+
+          }
+
+          if (nb_joueurs >= 4) {
+              //ROUGE
+              cartes.add(new Carte(Age.II, Couleur.ROUGE, "Place d'armes", 0, new Materiaux(0, 0, 1, 0, 2, 0, 0, 0)));
+
+              //JAUNE
+              cartes.add(new Carte(Age.II, Couleur.JAUNE, "Bazar", 0, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
+
+              //VERT
+              cartes.add(new Carte(Age.II, Couleur.VERT, "Dispensaire", 0, new Materiaux(0, 0, 0, 0, 2, 0, 0, 1)));
+
+              //MARRON
+              cartes.add(new Carte(Age.II, Couleur.MARRON, "Carriere", 0, new Materiaux(1, 0, 0, 0, 0, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.MARRON, "Scierie", 0, new Materiaux(1, 0, 0, 0, 0, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.MARRON, "Fonderie", 0, new Materiaux(1, 0, 0, 0, 0, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.MARRON, "Briqueterie", 0, new Materiaux(1, 0, 0, 0, 0, 0, 0, 0)));
+
+
+          }
+          if (nb_joueurs >= 5) {
+
+              //BLEU
+              cartes.add(new Carte(Age.II, Couleur.BLEU, "Tribunal", 4, new Materiaux(0, 0, 0, 2, 0, 1, 0, 0)));
+
+              //ROUGE
+              cartes.add(new Carte(Age.II, Couleur.ROUGE, "Ecuries", 0, new Materiaux(0, 0, 1, 1, 1, 0, 0, 0)));
+
+              //JAUNE
+
+              cartes.add(new Carte(Age.II, Couleur.JAUNE, "Caravanserail", 0, new Materiaux(0, 0, 2, 0, 0, 0, 0, 0)));
+
+              //VERT
+
+              cartes.add(new Carte(Age.II, Couleur.VERT, "Laboratoire", 0, new Materiaux(0, 0, 0, 2, 0, 0, 1, 0)));
+
+              //GRIS
+              cartes.add(new Carte(Age.II, Couleur.GRIS, "Verrerie", 0, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.GRIS, "Presse", 0, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
+              cartes.add(new Carte(Age.II, Couleur.GRIS, "Metier à tisser", 0, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0)));
+
+          }
+      }
 
     return cartes;
   }

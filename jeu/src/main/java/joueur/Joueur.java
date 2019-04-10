@@ -135,7 +135,6 @@ public class Joueur {
   public void seConnecter() {
     connexion.connect();
 
-    System.out.println("[JOUEUR] "+getNom()+" : En attente de déconnexion");
     synchronized (attenteDeconnexion) {
       try {
         attenteDeconnexion.wait();
@@ -153,55 +152,9 @@ public class Joueur {
   public void setMateriauxProduite(Materiaux materiauxProduite) {
     this.materiauxProduite = materiauxProduite;
   }
-  public void ajouterRessourceProduite(Materiaux materiauxProduite) {
-    this.materiauxProduite = materiauxProduite;
-  }
   public void setMerveille(Merveille merveille) {
     this.merveille = merveille;
   }
-
-
-  /*public void poserUneCarte(Carte c){
-    switch (strategie){
-      case GUERRE:
-        for (int i = 0; i < cartesEnMain.size(); i++){
-          if(this.cartesEnMain.get(i).getCouleur().equals(Couleur.ROUGE)){
-            cartesEnMain.remove(i);
-            break;
-          }
-          merveille.poserUneCarte(c);
-        }
-        break;
-
-      case ALCHIMISTE:
-        for (int i = 0; i < cartesEnMain.size(); i++){
-          if(this.cartesEnMain.get(i).getCouleur().equals(Couleur.VERT)){
-            cartesEnMain.remove(i);
-            break;
-          }
-          merveille.poserUneCarte(c);
-        }
-        break;
-
-      case BATIMENT:
-        for (int i = 0; i < cartesEnMain.size(); i++){
-          if(this.cartesEnMain.get(i).getCouleur().equals(Couleur.BLEU)){
-            cartesEnMain.remove(i);
-            break;
-          }
-          merveille.poserUneCarte(c);
-        }
-        break;
-
-    }
-    for (int i = 0; i < cartesEnMain.size(); i++) {
-      if(cartesEnMain.get(i).equals(c)){
-        cartesEnMain.remove(i);
-        break;
-      }
-    }
-    merveille.poserUneCarte(c);
-  }*/
 
 
   public void poserUneCarte(Carte c){

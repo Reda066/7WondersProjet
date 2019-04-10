@@ -2,7 +2,6 @@ package joueur;
 
 import jeu.Carte;
 import jeu.Couleur;
-import jeu.Strategie;
 
 public class Guerrier extends Joueur {
     public Guerrier(String nom,String urlServeur) {

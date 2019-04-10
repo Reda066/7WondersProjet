@@ -89,7 +89,10 @@ public List<Participant> getJoueurs() {
 
           // le jeu continue si le nb de carte en main != 0
           }else if (finDeTousLesActionsDesJoueurs()){
+            System.out.println("-----------------------------------------------------------------------");
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> FIN DU TOUR N°"+nb_tours+" <<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+            afficherScores();
+            System.out.println("-----------------------------------------------------------------------");
 
             nb_tours++;
               ArrayList<Carte> temp =  joueurs.get(joueurs.size()-1).getCartesEnMain();
@@ -113,6 +116,20 @@ public List<Participant> getJoueurs() {
             System.out.println(j.getNom()+" : "+j.score()+" points et de "+j.getMateriauxProduite().getOr()+" or");
         }
         System.out.println("Le joueur gagnant est  "+joueurs.get(max_index).getNom()+" avec "+joueurs.get(max_index).score()+" Points");
+
+    }
+
+    public void afficherScoresParTour(){
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("[SERVEUR][PARTIE] LES SCORES SONT : ");
+        System.out.println("-----------------------------------------------------------------------");
+        int max_index = 0;
+        for (int i = 0; i < joueurs.size(); i++) {
+            Participant j = joueurs.get(i);
+            if(j.score()>=joueurs.get(max_index).score())
+                max_index=i;
+            System.out.println(j.getNom()+" : "+j.score()+" points et de "+j.getMateriauxProduite().getOr()+" or");
+        }
 
     }
 

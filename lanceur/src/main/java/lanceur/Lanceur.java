@@ -1,5 +1,4 @@
 package lanceur;
-import jeu.Strategie;
 import joueur.Alchimiste;
 import joueur.Batiment;
 import joueur.Guerrier;

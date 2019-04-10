@@ -49,7 +49,6 @@ public class Participant {
     for (int i = 0; i < cartesEnMain.size(); i++) {
       if(cartesEnMain.get(i).equals(c)){
         cartesEnMain.remove(i);
-        //break;
       }
     }
     merveille.poserUneCarte(c);
