@@ -9,3 +9,5 @@
     -> Création de classes filles guerrier,batiment,alchimiste
 
 - Réalisation de multiples tests unitaires.
+
+- Ajout des cartes de l'age 2.
