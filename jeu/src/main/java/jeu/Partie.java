@@ -107,11 +107,11 @@ public List<Participant> getJoueurs() {
         int max_index = 0;
         for (int i = 0; i < joueurs.size(); i++) {
             Participant j = joueurs.get(i);
-            if(j.Score()>=joueurs.get(max_index).Score())
+            if(j.score()>=joueurs.get(max_index).score())
                 max_index=i;
-            System.out.println(j.getNom()+" : "+j.Score()+" points et de "+j.getMateriauxProduite().getOr()+" or");
+            System.out.println(j.getNom()+" : "+j.score()+" points et de "+j.getMateriauxProduite().getOr()+" or");
         }
-        System.out.println("Le joueur gagnant est  "+joueurs.get(max_index).getNom()+" avec "+joueurs.get(max_index).Score()+" Points");
+        System.out.println("Le joueur gagnant est  "+joueurs.get(max_index).getNom()+" avec "+joueurs.get(max_index).score()+" Points");
 
     }
 

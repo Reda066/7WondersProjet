@@ -6,11 +6,11 @@ import java.util.UUID;
 public class Participant {
 
 
-  protected ArrayList<Carte> cartesEnMain = new ArrayList<Carte>(){};
+  public ArrayList<Carte> cartesEnMain = new ArrayList<Carte>(){};
 
   protected String nom = "Inconnu";
 
-  protected Merveille merveille;
+  public Merveille merveille;
 
   protected Materiaux materiauxProduite;
 
@@ -37,18 +37,19 @@ public class Participant {
   public Materiaux getMateriauxProduite() {
     return materiauxProduite;
   }
-
+  public void setMateriauxProduite(Materiaux m ){ this.materiauxProduite = m;}
 
 
   public void setMerveille(Merveille merveille) {
     this.merveille = merveille;
   }
+  public Merveille getMerveille(){return this.merveille;}
 
   public void poserUneCarte(Carte c){
     for (int i = 0; i < cartesEnMain.size(); i++) {
       if(cartesEnMain.get(i).equals(c)){
         cartesEnMain.remove(i);
-        break;
+
       }
     }
     merveille.poserUneCarte(c);
@@ -77,13 +78,17 @@ public class Participant {
 
   public void ajouterOr(int nb){
     getMateriauxProduite().getListeMateriaux().set(0, getMateriauxProduite().getListeMateriaux().get(0).intValue() + nb);
+
+
   }
 
-  public int Score(){
+  public int score(){
     int score =0;
     ArrayList<Carte> cartes = merveille.getCartesPose();
-    for (int i = 0; i <cartes.size(); i++)
-      score+=cartes.get(i).getPointsVictoire();
+    for (int i = 0; i <cartes.size(); i++){
+      score += cartes.get(i).getPointsVictoire();
+    }
+
     return score;
   }
 }
