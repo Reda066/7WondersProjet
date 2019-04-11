@@ -35,9 +35,13 @@ nombre de carte sera disponible, ect...)
 
 ## Livraison 6
 
-- Création enumeration lié à un joueur qui sera sa tactique. ex : guerre,alchimiste,batiment..
+- Ajout d'une IA par joueur
+    -> Création de classes filles : guerrier,batiment,alchimiste 
 - Création des cartes de l'age 2 (sans les contraintes avec l'age 1)
+- Réalisation tests unitaires
 
 ## Livraison 7
 
-- Implémentation de la tactique qui influencera les actions des joueurs
+ - Commentaires du code
+ - Amélioration de l'ergonomie du code
+ - Réalisation tests unitaires
