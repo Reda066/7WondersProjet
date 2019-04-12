@@ -44,7 +44,7 @@ public class Joueur {
       connexion.on("connect", new Emitter.Listener() {
         @Override
         public void call(Object... objects) {
-          connexion.emit("voila_mon_nom",getNom());
+          connexion.emit("nom_client",getNom());
         }
       });
 

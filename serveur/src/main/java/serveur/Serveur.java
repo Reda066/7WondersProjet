@@ -20,7 +20,7 @@ public class Serveur {
     serveur = new SocketIOServer(config);
     partie = new Partie(serveur);
 
-    serveur.addEventListener("voila_mon_nom", String.class, new DataListener<String>() {
+    serveur.addEventListener("nom_client", String.class, new DataListener<String>() {
       public void onData(SocketIOClient client, String nom, AckRequest ackRequest) throws Exception {
 
         synchronized (Serveur.this) {
