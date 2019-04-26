@@ -62,7 +62,7 @@ class ParticipantTest {
         assertEquals(1,this.participant.cartesEnMain.size());
 
         System.out.println("------------------TEST POSER UNE CARTE------------------");
-        System.out.println("Les cartes "+c1.getNom()+" et "+c2.getNom() +" ont bien été posées");
+        System.out.println("Les cartes "+c1.toString()+" et "+c2.toString() +" ont bien été posées");
 
     }
 
@@ -73,7 +73,7 @@ class ParticipantTest {
 
         assertEquals(2, this.carteEnMain.size());
         System.out.println("------------------TEST AJOUT CARTE EN MAIN------------------");
-        System.out.println("Les cartes "+c1.getNom()+" et "+c2.getNom() +" ont bien été ajoutées à la main");
+        System.out.println("Les cartes "+c1.toString()+" et "+c2.toString() +" ont bien été ajoutées à la main");
     }
 
     @Test

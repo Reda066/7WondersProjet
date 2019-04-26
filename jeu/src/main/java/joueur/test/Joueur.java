@@ -1,4 +1,4 @@
-package joueur;
+package joueur.test;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

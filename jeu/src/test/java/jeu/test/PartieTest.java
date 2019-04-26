@@ -2,14 +2,10 @@ package jeu.test;
 
 import com.corundumstudio.socketio.SocketIOServer;
 import jeu.*;
-import joueur.Joueur;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PartieTest {
     SocketIOServer serveur;

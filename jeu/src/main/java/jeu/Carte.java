@@ -35,4 +35,8 @@ public class Carte {
         return couleur;
     }
 
+    public String toString(){
+        return "[Nom->"+getNom()+" | Couleur->"+getCouleur()+" | Points->"+getPointsVictoire()+"]";
+    }
+
 }
