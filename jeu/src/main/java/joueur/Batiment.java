@@ -4,6 +4,7 @@ import jeu.Carte;
 import jeu.Couleur;
 
 public class Batiment extends Joueur {
+
     public Batiment(String nom, String urlServeur) {
         super(nom, urlServeur);
     }
@@ -18,4 +19,5 @@ public class Batiment extends Joueur {
             merveille.poserUneCarte(c);
         }
     }
+
 }

@@ -4,6 +4,7 @@ import jeu.Carte;
 import jeu.Couleur;
 
 public class Alchimiste extends  Joueur {
+
     public Alchimiste(String nom, String urlServeur) {
         super(nom, urlServeur);
     }

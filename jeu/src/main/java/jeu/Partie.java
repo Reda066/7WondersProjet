@@ -11,7 +11,7 @@ public class Partie {
 private SocketIOServer serveur;
 private Age age = Age.I;
 private int nb_tours=0;
-private List<Participant> joueurs = new ArrayList<Participant>();
+private ArrayList<Participant> joueurs = new ArrayList<Participant>();
 private ArrayList<Carte> defausse = new ArrayList<Carte>();
 
 public List<Participant> getJoueurs() {

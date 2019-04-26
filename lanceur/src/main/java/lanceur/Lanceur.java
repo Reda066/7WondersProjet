@@ -29,22 +29,22 @@ public class Lanceur {
       public void run() {
         Joueur c = new Alchimiste("Ines",url);
         c.seConnecter();
-      }
-    });
-    Thread c3 = new Thread(new Runnable() {
-      @Override
-      public void run() {
+                }
+                });
+                Thread c3 = new Thread(new Runnable() {
+@Override
+public void run() {
         Joueur c = new Batiment("Reda",url);
         c.seConnecter();
-      }
-    });
+        }
+                });
 
 
-    serveur.start();
-    c1.start();
-    c2.start();
-    c3.start();
+                serveur.start();
+                c1.start();
+                c2.start();
+                c3.start();
 
 
-  }
-}
+                }
+                }

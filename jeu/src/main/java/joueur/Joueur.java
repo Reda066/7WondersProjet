@@ -184,13 +184,6 @@ public void defausserUneCarte(Carte c){
 
   }
 
-  public int Score(){
-    int score =0;
-    ArrayList<Carte> cartes = merveille.getCartesPose();
-    for (int i = 0; i <cartes.size(); i++)
-      score+=cartes.get(i).getPointsVictoire();
-    return score;
-  }
 
 
   public String getNom() {
