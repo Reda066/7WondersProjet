@@ -1,4 +1,5 @@
 package jeu;
+
 public enum Age {
-	I,II,III;
+    I, II, III;
 }

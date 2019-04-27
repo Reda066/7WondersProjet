@@ -1,18 +1,19 @@
 package jeu;
+
 public class Carte {
-    
+
     private Age age;
     private Couleur couleur;
     private String nom;
     private Materiaux cout;
 
-    private int pointsVictoire ;
+    private int pointsVictoire;
+
     public int getPointsVictoire() {
         return pointsVictoire;
     }
 
 
-    
     public Carte(Age age, Couleur couleur, String nom, int pointsVictoire, Materiaux cout) {
         this.age = age;
         this.couleur = couleur;
@@ -28,15 +29,17 @@ public class Carte {
     public String getNom() {
         return nom;
     }
+
     public Materiaux getCout() {
         return cout;
     }
+
     public Couleur getCouleur() {
         return couleur;
     }
 
-    public String toString(){
-        return "[Nom->"+getNom()+" | Couleur->"+getCouleur()+" | Points->"+getPointsVictoire()+"]";
+    public String toString() {
+        return "[Nom->" + getNom() + " | Couleur->" + getCouleur() + " | Points->" + getPointsVictoire() + "]";
     }
 
 }

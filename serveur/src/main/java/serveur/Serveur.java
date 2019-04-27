@@ -12,51 +12,52 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 
 public class Serveur {
-  SocketIOServer serveur;
-  Partie partie;
+    SocketIOServer serveur;
+    Partie partie;
 
-  public Serveur(Configuration config) {
-    serveur = new SocketIOServer(config);
-    partie = new Partie(serveur);
+    public Serveur(Configuration config) {
+        serveur = new SocketIOServer(config);
+        partie = new Partie(serveur);
 
-    serveur.addEventListener("nom_client", String.class, new DataListener<String>() {
-      public void onData(SocketIOClient client, String nom, AckRequest ackRequest) throws Exception {
+        serveur.addEventListener("nomClient", String.class, new DataListener<String>() {
+            public void onData(SocketIOClient client, String nom, AckRequest ackRequest) throws Exception {
 
-        synchronized (Serveur.this) {
-          Participant p = new Participant(nom, client.getSessionId(), partie.getJoueurs().size());
-          partie.ajouter_joueur(p);
-        }
-        if(partie.getJoueurs().size()>=3 && partie.getJoueurs().size()<=7)
-          partie.commencer();
-      }
-    });
-    System.out.println("SERVEUR > Initialisation et création des écouteurs d'évenements");
-    serveur.addConnectListener(new ConnectListener() {
-      public void onConnect(SocketIOClient client) {
-        System.out.println("SERVEUR > Connexion d'un nouveau client.");
-      }
-    });
-  }
-
-  public static final void main(String[] args) {
-    try {
-      System.setOut(new PrintStream(System.out, true, "UTF-8"));
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
+                synchronized (Serveur.this) {
+                    Participant p = new Participant(nom, client.getSessionId(), partie.getJoueurs().size());
+                    partie.ajouterJoueur(p);
+                }
+                if (partie.getJoueurs().size() >= 3 && partie.getJoueurs().size() <= 7)
+                    partie.commencer();
+            }
+        });
+        System.out.println("SERVEUR > Initialisation et création des écouteurs d'évenements");
+        serveur.addConnectListener(new ConnectListener() {
+            public void onConnect(SocketIOClient client) {
+                System.out.println("SERVEUR > Connexion d'un nouveau client.");
+            }
+        });
     }
 
-    Configuration config = new Configuration();
-    config.setHostname("127.0.0.1");
-    config.setPort(9000);
+    public static final void main(String[] args) {
+        try {
+            System.setOut(new PrintStream(System.out, true, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        Configuration config = new Configuration();
+        config.setHostname("127.0.0.1");
+        config.setPort(9000);
 
 
-    Serveur serveur = new Serveur(config);
-    serveur.demarrer();
+        Serveur serveur = new Serveur(config);
+        serveur.demarrer();
 
-  }
-  private void demarrer() {
-    serveur.start();
-    System.out.println("SERVEUR > Le serveur démarre.");
-  }
+    }
+
+    private void demarrer() {
+        serveur.start();
+        System.out.println("SERVEUR > Le serveur démarre.");
+    }
 
 }

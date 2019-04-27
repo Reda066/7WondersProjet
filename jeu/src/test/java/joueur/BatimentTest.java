@@ -1,4 +1,4 @@
-package joueur.test;
+package joueur;
 
 import jeu.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,22 +8,21 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AlchimisteTest {
+class BatimentTest {
     String url = "127.0.0.1:9000";
 
-    Alchimiste a;
+    Batiment a;
 
     Carte c1, c2, c3;
 
     Merveille m;
 
     ArrayList<Carte> carte;
-
     @BeforeEach
     void setUp() {
-        this.a = new Alchimiste("reda", url);
+        this.a = new Batiment("reda", url);
 
-        this.m = new Merveille("EPHESOS",Face.A,3);
+        this.m = new Merveille("EPHESOS", Face.A,3);
 
         this.a.merveille = m;
 
@@ -39,8 +38,8 @@ class AlchimisteTest {
 
         this.a.cartesEnMain = carte;
 
-
     }
+
 
     @Test
     void poserUneCarte() {
@@ -48,14 +47,11 @@ class AlchimisteTest {
         assertEquals(3, this.a.cartesEnMain.size());
         System.out.println("La main a bien une taille de "+this.a.cartesEnMain.size());
 
-        this.a.poserUneCarte(c2);
+        this.a.poserUneCarte(c1);
 
-        System.out.println("------------------TEST POSER UNE CARTE VERTE------------------");
+        System.out.println("------------------TEST POSER UNE CARTE BLEU------------------");
         assertEquals(2, this.a.cartesEnMain.size());
         assertNotNull(this.a.merveille.getCartesPose());
         System.out.println("La main a bien une taille de "+this.a.cartesEnMain.size()+" la carte "+c2.toString()+" a bien été posé");
-
-
-
     }
 }

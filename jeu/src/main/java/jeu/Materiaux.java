@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Materiaux {
 
-    protected ArrayList<Integer> listeMateriaux = new ArrayList<Integer>(){};
+    protected ArrayList<Integer> listeMateriaux = new ArrayList<Integer>() {
+    };
 
     public Materiaux(int or, int pierre, int bois, int argile, int minerai, int textile, int papyrus, int verre) {
         listeMateriaux.add(or);
@@ -21,8 +22,8 @@ public class Materiaux {
         return listeMateriaux;
     }
 
-    public int getOr(){
+    public int getOr() {
         return getListeMateriaux().get(0);
     }
 
-   }
+}

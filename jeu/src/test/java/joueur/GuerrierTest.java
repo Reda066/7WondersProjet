@@ -1,4 +1,4 @@
-package joueur.test;
+package joueur;
 
 import jeu.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,25 +8,24 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class JoueurTest {
+class GuerrierTest {
+
     String url = "127.0.0.1:9000";
 
-    Joueur joueur;
+    Guerrier a;
 
     Carte c1, c2, c3;
 
     Merveille m;
 
     ArrayList<Carte> carte;
-
     @BeforeEach
     void setUp() {
-
-        this.joueur = new Joueur("reda", url);
+        this.a = new Guerrier("reda", url);
 
         this.m = new Merveille("EPHESOS", Face.A,3);
 
-        this.joueur.merveille = m;
+        this.a.merveille = m;
 
         this.c1 = new Carte(Age.I, Couleur.BLEU, "Autel", 2, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0));
         this.c2 = new Carte(Age.I, Couleur.VERT, "Officine", 0, new Materiaux(0, 0, 0, 0, 0, 1, 0, 0));
@@ -38,21 +37,22 @@ class JoueurTest {
         this.carte.add(c3);
 
 
-        this.joueur.cartesEnMain = carte;
+        this.a.cartesEnMain = carte;
 
     }
+
 
     @Test
     void poserUneCarte() {
-        System.out.println("before test : la taille de la main " + this.joueur.cartesEnMain.size());
+        System.out.println("------------------TEST EXISTANCE MAIN NON VIDE------------------");
+        assertEquals(3, this.a.cartesEnMain.size());
+        System.out.println("La main a bien une taille de "+this.a.cartesEnMain.size());
 
-        this.joueur.poserUneCarte(c1);
-        assertEquals(2, this.joueur.cartesEnMain.size());
-        assertEquals(1, this.joueur.merveille.getCartesPose().size());
+        this.a.poserUneCarte(c3);
 
-
-
+        System.out.println("------------------TEST POSER UNE CARTE ROUGE------------------");
+        assertEquals(2, this.a.cartesEnMain.size());
+        assertNotNull(this.a.merveille.getCartesPose());
+        System.out.println("La main a bien une taille de "+this.a.cartesEnMain.size()+" la carte "+c2.toString()+" a bien été posé");
     }
-
-
 }
