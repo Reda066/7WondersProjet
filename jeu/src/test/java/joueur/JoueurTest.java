@@ -44,13 +44,14 @@ class JoueurTest {
 
     @Test
     void poserUneCarte() {
-        System.out.println("before test : la taille de la main " + this.joueur.cartesEnMain.size());
+        System.out.println("------------------TEST TAILLE MAIN JOUEUR------------------");
+        System.out.println("La taille de la main avant est de : " + this.joueur.cartesEnMain.size());
 
         this.joueur.poserUneCarte(c1);
         assertEquals(2, this.joueur.cartesEnMain.size());
         assertEquals(1, this.joueur.merveille.getCartesPose().size());
 
-
+        System.out.println("La taille de la main après avoir posé une carte est de : " + this.joueur.cartesEnMain.size()+ ". La carte "+c1.toString()+" a bien été posé");
 
     }
 
