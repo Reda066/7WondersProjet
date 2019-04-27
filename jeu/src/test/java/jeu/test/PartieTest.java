@@ -44,44 +44,4 @@ class PartieTest {
 
     }
 
-
-    @Test
-    void finAgeCourant() {
-    }
-
-    @Test
-    void finDeTousLesActionsDesJoueurs() {
-    }
-
-    @Test
-    void ajouter_joueur() {
-    }
-
-    @Test
-    void decouvrir_voisins() {
-    }
-
-    @Test
-    void distribuer_merveille() {
-    }
-
-    @Test
-    void voisin() {
-    }
-
-    @Test
-    void distribuer_cartes() {
-    }
-
-    @Test
-    void distribuer_cartes1() {
-    }
-
-    @Test
-    void donner_gold() {
-    }
-
-    @Test
-    void commencer() {
-    }
 }
