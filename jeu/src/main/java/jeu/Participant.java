@@ -91,4 +91,10 @@ public class Participant {
     return score;
   }
 
+  public Participant voisinGauche(ArrayList<Participant> ps){
+    return ps.get(rang+1>(ps.size()-1)?0:rang+1);
+  }
+  public Participant voisinDroite(ArrayList<Participant> ps){
+    return ps.get(rang+1>(ps.size()-1)?0:rang+1);
+  }
 }

@@ -30,10 +30,10 @@ public class Serveur {
           partie.commencer();
       }
     });
-    System.out.println("[SERVEUR] Initialisation et création des écouteurs d'évenements");
+    System.out.println("SERVEUR > Initialisation et création des écouteurs d'évenements");
     serveur.addConnectListener(new ConnectListener() {
       public void onConnect(SocketIOClient client) {
-        System.out.println("[SERVEUR] Connexion d'un nouveau client.");
+        System.out.println("SERVEUR > Connexion d'un nouveau client.");
       }
     });
   }
@@ -56,7 +56,7 @@ public class Serveur {
   }
   private void demarrer() {
     serveur.start();
-    System.out.println("[SERVEUR] Le serveur est démarré.");
+    System.out.println("SERVEUR > Le serveur démarre.");
   }
 
 }

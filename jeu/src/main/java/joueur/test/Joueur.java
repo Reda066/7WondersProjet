@@ -39,7 +39,7 @@ public class Joueur {
       connexion = IO.socket(urlServeur, opts);
 
 
-      System.out.println("[JOUEUR] " + getNom() + " : Préparation des écouteurs");
+      System.out.println("JOUEUR > " + getNom() + " : Préparation des écouteurs");
 
       connexion.on("connect", new Emitter.Listener() {
         @Override
@@ -51,7 +51,7 @@ public class Joueur {
       connexion.on("disconnect", new Emitter.Listener() {
         @Override
         public void call(Object... objects) {
-          System.out.println("[JOUEUR] "+getNom()+" : Je me suis fait déconnecté");
+          System.out.println("JOUEUR > "+getNom()+" : Je me suis fait déconnecté");
           connexion.disconnect();
           connexion.close();
 
@@ -140,7 +140,7 @@ public class Joueur {
         attenteDeconnexion.wait();
       } catch (InterruptedException e) {
         e.printStackTrace();
-        System.err.println("[JOUEUR] "+getNom()+" : Erreur dans l'attente");
+        System.err.println("JOUEUR > "+getNom()+" : Erreur dans l'attente");
       }
     }
   }
