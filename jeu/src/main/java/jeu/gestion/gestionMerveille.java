@@ -8,9 +8,8 @@ import java.util.Random;
 
 public class gestionMerveille {
   public gestionMerveille(){}
-  public ArrayList<Merveille> getToutesLesMerveillesPossible(){
+  public ArrayList<Merveille> getListMerveille(){
     ArrayList<Merveille> merveilles = new ArrayList<Merveille>();
-    Random r = new Random();
     merveilles.add(new Merveille("ALEXANDRIA",Face.A,3));
     merveilles.add(new Merveille("BABYLON",Face.A,3));
     merveilles.add(new Merveille("EPHESOS",Face.A,3));
@@ -43,14 +42,14 @@ public class gestionMerveille {
     return merveilles;
   }
   public Merveille getMerveille(String n,Face f){
-    ArrayList<Merveille> merveilles = getToutesLesMerveillesPossible();
+    ArrayList<Merveille> merveilles = getListMerveille();
     for(Merveille m:merveilles)
       if(m.getNom().equals(n) && m.getFace().equals(f))
         return m;
     return null;
   }
 //Obtenir une merveille aléatoirement
-  public ArrayList<Merveille> getAleaMerveilles(int nb){
+  public ArrayList<Merveille> getRandomMerveille(int nb){
     ArrayList<Merveille> merveilles = getMerveilles();
     Collections.shuffle(merveilles);
     merveilles.subList(0, nb-1);

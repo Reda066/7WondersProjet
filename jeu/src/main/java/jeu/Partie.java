@@ -178,7 +178,7 @@ public class Partie {
     }
 
     public void distribuerMerveille() {
-        ArrayList<Merveille> merveilles = new gestionMerveille().getAleaMerveilles(joueurs.size());
+        ArrayList<Merveille> merveilles = new gestionMerveille().getRandomMerveille(joueurs.size());
         Face face;
         if (Math.random() * 1 == 0) face = Face.A;
         else face = Face.B;
@@ -211,7 +211,7 @@ public class Partie {
 
     public void distribuerCartes() {
         nb_tours++;
-        ArrayList<Carte> cartes = new gestionCarte().getAleaCartes(joueurs.size(), age);
+        ArrayList<Carte> cartes = new gestionCarte().getRandomCarte(joueurs.size(), age);
         int index = 0;
         for (Carte c : cartes) {
             joueurs.get(index).ajouterCarteEnMain(c);

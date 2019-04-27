@@ -179,7 +179,7 @@ public class gestionCarte {
   }
 
 // obtention des cartes de façon aléatoire grace à la methode shuffle
-  public ArrayList<Carte> getAleaCartes(int nb, Age a) {
+  public ArrayList<Carte> getRandomCarte(int nb, Age a) {
     ArrayList<Carte> cartes = getCartes(nb, a);
     Collections.shuffle(cartes);
     return cartes;
