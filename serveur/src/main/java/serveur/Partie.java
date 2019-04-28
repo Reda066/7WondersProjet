@@ -1,10 +1,15 @@
-package jeu;
+package serveur;
 
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.DataListener;
+import jeu.Age;
+import jeu.Carte;
+import jeu.Face;
+import jeu.Merveille;
 import jeu.gestion.*;
+import joueur.Joueur;
 
 import java.util.*;
 
@@ -12,10 +17,10 @@ public class Partie {
     private SocketIOServer serveur;
     private Age age = Age.I;
     private int nb_tours = 0;
-    private ArrayList<Participant> joueurs = new ArrayList<Participant>();
+    private ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
     private ArrayList<Carte> defausse = new ArrayList<Carte>();
 
-    public List<Participant> getJoueurs() {
+    public List<Joueur> getJoueurs() {
         return joueurs;
     }
 
@@ -76,7 +81,7 @@ public class Partie {
         serveur.addEventListener("finAction", boolean.class, new DataListener<Boolean>() {
             public void onData(SocketIOClient client, Boolean c, AckRequest ackRequest) throws Exception {
                 System.out.println("SERVEUR && PARTIE >  " + getJoueurById(client.getSessionId()).getNom() + " a terminé son tour");
-                for (Participant j : joueurs) {
+                for (Joueur j : joueurs) {
                     if (j.id().equals(client.getSessionId())) {
                         j.fins_actions = true;
                         break;
@@ -113,7 +118,7 @@ public class Partie {
         System.out.println("SERVEUR && PARTIE >  LES SCORES SONT : ");
         int max_index = 0;
         for (int i = 0; i < joueurs.size(); i++) {
-            Participant j = joueurs.get(i);
+            Joueur j = joueurs.get(i);
             if (j.score() >= joueurs.get(max_index).score())
                 max_index = i;
             System.out.println(j.getNom() + " : " + j.score() + " points et de " + j.getMateriauxProduite().getOr() + " or");
@@ -129,7 +134,7 @@ public class Partie {
         System.out.println("-----------------------------------------------------------------------");
         int max_index = 0;
         for (int i = 0; i < joueurs.size(); i++) {
-            Participant j = joueurs.get(i);
+            Joueur j = joueurs.get(i);
             if (j.score() >= joueurs.get(max_index).score())
                 max_index = i;
             System.out.println(j.getNom() + " : " + j.score() + " points et de " + j.getMateriauxProduite().getOr() + " or");
@@ -139,7 +144,7 @@ public class Partie {
 
     // se situer à la fin de l'age lorsqu'il n'y a plus de carte en main
     public boolean finAge() {
-        for (Participant j : joueurs) {
+        for (Joueur j : joueurs) {
             if (j.getCartesEnMain().size() != 0 || !j.fins_actions)
                 return false;
         }
@@ -148,34 +153,33 @@ public class Partie {
 
     // se situer si les joueurs ont fini leurs actions
     public boolean finActions() {
-        for (Participant j : joueurs) {
+        for (Joueur j : joueurs) {
             if (!j.fins_actions)
                 return false;
         }
         return true;
     }
 
-    // ajout de joueur en tant que participant
-    public void ajouterJoueur(Participant p) {
+    // ajout de joueur en tant que joueur
+    public void ajouterJoueur(Joueur p) {
         System.out.println("PARTIE >  " + p.getNom() + " a été ajouté a la partie");
         joueurs.add(p);
     }
 
-    public Participant getJoueurById(UUID id) {
-        for (Participant j : joueurs)
+    public Joueur getJoueurById(UUID id) {
+        for (Joueur j : joueurs)
             if (j.id().equals(id))
                 return j;
 
         return null;
     }
 
-    public void decouvrirVoisins() {
-        for (Participant p : joueurs) {
-            p.voisinDroite = voisin(p.getRang(), false);
-            p.voisinGauche = voisin(p.getRang(), true);
-            serveur.getClient(p.id()).sendEvent("decouvrirVoisin", voisin(p.getRang(), false), voisin(p.getRang(), true));
+    public void decouvrir_voisins(){
+        for(Joueur p : joueurs){
+            serveur.getClient(p.id()).sendEvent("decouvrir_voisins",p.voisinDroite(joueurs),p.voisinGauche(joueurs));
         }
     }
+
 
     public void distribuerMerveille() {
         ArrayList<Merveille> merveilles = new gestionMerveille().getRandomMerveille(joueurs.size());
@@ -190,23 +194,18 @@ public class Partie {
         }
     }
 
-    public Participant voisin(int rang_joueur_courant, boolean de_gauche) {
-        if (de_gauche)
-            return joueurs.get(rang_joueur_courant + 1 >= (joueurs.size() - 1) ? 0 : rang_joueur_courant + 1);
-        else
-            return joueurs.get(rang_joueur_courant - 1 < 0 ? joueurs.size() - 1 : rang_joueur_courant - 1);
-    }
-
-    public boolean distribuerCartes(ArrayList<Carte> cartes, Participant j) {
+      public boolean distribuerCartes(ArrayList<Carte> cartes, Joueur j) {
         if (cartes.size() <= 0)
             return true;
         j.fins_actions = false;
         j.setCartesEnMain(cartes);
-        System.out.println("SERVEUR && PARTIE >  Envoi des cartes aux joueurs" + j.getNom());
-        carteEnMain();
+        System.out.println("SERVEUR && PARTIE >  Envoi des cartes au joueur " + j.getNom());
+        revelerLesCartesAuxJoueurs();
         serveur.getClient(j.id()).sendEvent("receptionCarte", j.getCartesEnMain());
-        decouvrirVoisins();
+
+        decouvrir_voisins();
         return true;
+
     }
 
     public void distribuerCartes() {
@@ -220,28 +219,32 @@ public class Partie {
                 index = 0;
         }
 
-        for (Participant j : joueurs) {
+        for (Joueur j : joueurs) {
             System.out.println("SERVEUR && PARTIE > Envoi des cartes au joueur " + j.getNom());
+
             serveur.getClient(j.id()).sendEvent("receptionCarte", j.getCartesEnMain());
+            revelerLesCartesAuxJoueurs();
         }
-        decouvrirVoisins();
+
 
     }
 
 
-    public void carteEnMain() {
-        System.out.println("SERVEUR && PARTIE >  Distribution des cartes aux joueurs");
-        for (Participant p : joueurs) {
-            System.out.println("SERVEUR && PARTIE >  " + p.getNom() + " obtiendra les cartes suivantes :  " + p.getCartesEnMain());
-            serveur.getClient(p.id()).sendEvent("reception_cartes", p.getCartesEnMain(), p.voisinDroite(joueurs), p.voisinGauche(joueurs));
-        }
-    }
+
 
     public void donnerOr() {
-        for (Participant j : joueurs) {
+        for (Joueur j : joueurs) {
             j.getMateriauxProduite().getListeMateriaux().set(0, j.getMateriauxProduite().getListeMateriaux().get(0).intValue() + 3);
             System.out.println("SERVEUR && PARTIE >  Le joueur " + j.getNom() + " reçoit 3 golds");
             serveur.getClient(j.id()).sendEvent("ajoutOr", j.getMateriauxProduite());
+        }
+    }
+
+    public void revelerLesCartesAuxJoueurs() {
+        System.out.println("SERVEUR && PARTIE >  Distribution des cartes aux joueurs");
+        for (Joueur p : joueurs) {
+            System.out.println("SERVEUR && PARTIE >  " + p.getNom() + " obtiendra les cartes suivantes :  " + p.getCartesEnMain());
+            serveur.getClient(p.id()).sendEvent("reception_cartes", p.getCartesEnMain(), p.voisinDroite(joueurs), p.voisinGauche(joueurs));
         }
     }
 
@@ -250,7 +253,7 @@ public class Partie {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> Démarrage de la partie <<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         distribuerMerveille();
         distribuerCartes();
-        carteEnMain();
+        revelerLesCartesAuxJoueurs();
         donnerOr();
         serveur.getBroadcastOperations().sendEvent("debut_partie");
         System.out.println("SERVEUR && PARTIE >  La partie commence !");

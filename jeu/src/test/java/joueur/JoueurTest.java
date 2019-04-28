@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class JoueurTest {
     String url = "127.0.0.1:9000";
 
-    Joueur joueur;
+    Joueur p;
 
     Carte c1, c2, c3;
 
@@ -22,11 +22,11 @@ class JoueurTest {
     @BeforeEach
     void setUp() {
 
-        this.joueur = new Joueur("reda", url);
+        this.p = new Joueur("reda", url);
 
         this.m = new Merveille("EPHESOS", Face.A,3);
 
-        this.joueur.merveille = m;
+        this.p.merveille = m;
 
         this.c1 = new Carte(Age.I, Couleur.BLEU, "Autel", 2, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0));
         this.c2 = new Carte(Age.I, Couleur.VERT, "Officine", 0, new Materiaux(0, 0, 0, 0, 0, 1, 0, 0));
@@ -38,20 +38,20 @@ class JoueurTest {
         this.carte.add(c3);
 
 
-        this.joueur.cartesEnMain = carte;
+        this.p.cartesEnMain = carte;
 
     }
 
     @Test
     void poserUneCarte() {
         System.out.println("------------------TEST TAILLE MAIN JOUEUR------------------");
-        System.out.println("La taille de la main avant est de : " + this.joueur.cartesEnMain.size());
+        System.out.println("La taille de la main avant est de : " + this.p.cartesEnMain.size());
 
-        this.joueur.poserUneCarte(c1);
-        assertEquals(2, this.joueur.cartesEnMain.size());
-        assertEquals(1, this.joueur.merveille.getCartesPose().size());
+        this.p.poserUneCarte(c1);
+        assertEquals(2, this.p.cartesEnMain.size());
+        assertEquals(1, this.p.merveille.getCartesPose().size());
 
-        System.out.println("La taille de la main après avoir posé une carte est de : " + this.joueur.cartesEnMain.size()+ ". La carte "+c1.toString()+" a bien été posé");
+        System.out.println("La taille de la main après avoir posé une carte est de : " + this.p.cartesEnMain.size()+ ". La carte "+c1.toString()+" a bien été posé");
 
     }
 

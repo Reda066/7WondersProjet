@@ -5,29 +5,51 @@ import com.google.gson.reflect.TypeToken;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
-import jeu.*;
-import jeu.gestion.*;
+import jeu.Carte;
+import jeu.Face;
+import jeu.Materiaux;
+import jeu.Merveille;
+import jeu.gestion.gestionMerveille;
 
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Joueur {
 
 
-    protected ArrayList<Carte> cartesEnMain = new ArrayList<Carte>() {
+    public ArrayList<Carte> cartesEnMain = new ArrayList<Carte>() {
     };
-    protected String nom = "Non-identifié";
-    protected Merveille merveille;
-    protected Materiaux materiauxProduite;
-
-
-    public boolean fins_actions = false;
     final Object attenteDeconnexion = new Object();
+    protected String nom = "Inconnu";
     Socket connexion;
 
-    protected Participant voisinDroite;
-    protected Participant voisinGauche;
+    public Merveille merveille;
+
+    protected Materiaux materiauxProduite;
+
+    protected int rang;
+
+    protected UUID id;
+
+    public Joueur voisinDroite;
+    public Joueur voisinGauche;
+
+    public boolean fins_actions = false;
+
+
+
+    public Joueur(String nom, UUID id, int r) {
+        this.nom = nom;
+        rang = r;
+        this.id = id;
+        materiauxProduite = new Materiaux(0, 0, 0, 0, 0, 0, 0, 0);
+    }
+
+
+
+
 
     public Joueur(String nom, String urlServeur) {
 
@@ -59,14 +81,16 @@ public class Joueur {
                     }
                 }
             });
+
             connexion.on("decouvrirVoisin", new Emitter.Listener() {
                 @Override
                 public void call(Object... o) {
                     Gson gson = new Gson();
-                    voisinDroite = gson.fromJson(o[0].toString(), Participant.class);
-                    voisinGauche = gson.fromJson(o[1].toString(), Participant.class);
+                    voisinDroite = gson.fromJson(o[0].toString(), Joueur.class);
+                    voisinGauche = gson.fromJson(o[1].toString(), Joueur.class);
                 }
             });
+
 
             connexion.on("ajoutOr", new Emitter.Listener() {
                 @Override
@@ -145,6 +169,44 @@ public class Joueur {
         }
     }
 
+    public ArrayList<Carte> getCartesEnMain() {
+        return cartesEnMain;
+    }
+
+    public void ajouterCarteEnMain(Carte c) {
+        this.cartesEnMain.add(c);
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+
+    public UUID id() {
+        return this.id;
+    }
+
+    public void setCartesEnMain(ArrayList<Carte> cartes) {
+        cartesEnMain = cartes;
+    }
+
+    public void ajouterOr(int nb) {
+        getMateriauxProduite().getListeMateriaux().set(0, getMateriauxProduite().getListeMateriaux().get(0).intValue() + nb);
+
+
+    }
+
+    public int score() {
+        int score = 0;
+        ArrayList<Carte> cartes = merveille.getCartesPose();
+        for (int i = 0; i < cartes.size(); i++) {
+            score += cartes.get(i).getPointsVictoire();
+        }
+
+        return score;
+    }
+
+
     public Materiaux getMateriauxProduite() {
         return materiauxProduite;
     }
@@ -186,10 +248,10 @@ public class Joueur {
 
     }
 
-
-    public String getNom() {
-        return nom;
+    public Joueur voisinGauche(ArrayList<Joueur> joueur){
+        return joueur.get(rang+1>(joueur.size()-1)?0:rang+1);
     }
-
-
+    public Joueur voisinDroite(ArrayList<Joueur> joueur){
+        return joueur.get(rang-1<0?joueur.size()-1:rang-1);
+    }
 }

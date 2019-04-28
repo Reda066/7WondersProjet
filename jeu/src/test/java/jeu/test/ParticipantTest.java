@@ -1,6 +1,7 @@
 package jeu.test;
 
 import jeu.*;
+import joueur.Joueur;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParticipantTest {
-    Participant participant;
+    Joueur participant;
     Carte c1, c2;
     Materiaux materiauxProduite;
     ArrayList<Carte> carteEnMain;
@@ -19,7 +20,7 @@ class ParticipantTest {
 
     @BeforeEach
     void setUp() {
-        this.participant = new Participant("Reda", new UUID(10,5),1);
+        this.participant = new Joueur("Reda", new UUID(10,5),1);
         this.c1= new Carte(Age.I, Couleur.BLEU, "Autel", 2, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0));
         this.c2 =  new Carte(Age.I, Couleur.BLEU, "Theatre", 2, new Materiaux(0, 0, 0, 0, 0, 0, 0, 0));
 

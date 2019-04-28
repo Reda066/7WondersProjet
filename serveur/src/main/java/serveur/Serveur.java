@@ -6,7 +6,7 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
-import jeu.*;
+import joueur.Joueur;
 
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
@@ -23,7 +23,7 @@ public class Serveur {
             public void onData(SocketIOClient client, String nom, AckRequest ackRequest) throws Exception {
 
                 synchronized (Serveur.this) {
-                    Participant p = new Participant(nom, client.getSessionId(), partie.getJoueurs().size());
+                    Joueur p = new Joueur(nom, client.getSessionId(), partie.getJoueurs().size());
                     partie.ajouterJoueur(p);
                 }
                 if (partie.getJoueurs().size() >= 3 && partie.getJoueurs().size() <= 7)

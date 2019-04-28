@@ -7,7 +7,7 @@ import java.util.Random;
 public class Merveille {
 
     protected String nom;
-    protected Face cote;
+    public Face cote;
     protected int etages;
     protected ArrayList<Carte> cartesPose = new ArrayList<Carte>() {
     };

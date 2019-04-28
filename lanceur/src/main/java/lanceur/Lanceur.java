@@ -1,9 +1,7 @@
 package lanceur;
 
-import joueur.Alchimiste;
-import joueur.Batiment;
-import joueur.Guerrier;
 import joueur.Joueur;
+import joueur.*;
 import serveur.Serveur;
 
 public class Lanceur {
