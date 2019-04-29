@@ -98,6 +98,7 @@ public class Partie {
                     System.out.println("-----------------------------------------------------------------------");
                     System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> FIN DU TOUR N°" + nb_tours + " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
                     afficherScoresParTour();
+                    carteEnMain();
                     System.out.println("-----------------------------------------------------------------------");
 
                     nb_tours++;
@@ -199,8 +200,8 @@ public class Partie {
             return true;
         j.fins_actions = false;
         j.setCartesEnMain(cartes);
+
         System.out.println("SERVEUR && PARTIE >  Envoi des cartes au joueur " + j.getNom());
-        revelerLesCartesAuxJoueurs();
         serveur.getClient(j.id()).sendEvent("receptionCarte", j.getCartesEnMain());
 
         decouvrir_voisins();
@@ -223,7 +224,7 @@ public class Partie {
             System.out.println("SERVEUR && PARTIE > Envoi des cartes au joueur " + j.getNom());
 
             serveur.getClient(j.id()).sendEvent("receptionCarte", j.getCartesEnMain());
-            revelerLesCartesAuxJoueurs();
+
         }
 
 
@@ -240,7 +241,7 @@ public class Partie {
         }
     }
 
-    public void revelerLesCartesAuxJoueurs() {
+    public void carteEnMain() {
         System.out.println("SERVEUR && PARTIE >  Distribution des cartes aux joueurs");
         for (Joueur p : joueurs) {
             System.out.println("SERVEUR && PARTIE >  " + p.getNom() + " obtiendra les cartes suivantes :  " + p.getCartesEnMain());
@@ -253,7 +254,7 @@ public class Partie {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>> Démarrage de la partie <<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         distribuerMerveille();
         distribuerCartes();
-        revelerLesCartesAuxJoueurs();
+        carteEnMain();
         donnerOr();
         serveur.getBroadcastOperations().sendEvent("debut_partie");
         System.out.println("SERVEUR && PARTIE >  La partie commence !");
