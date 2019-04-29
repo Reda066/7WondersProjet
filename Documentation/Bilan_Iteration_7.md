@@ -2,6 +2,10 @@
 
 - *Lancer le jeu en faisant run sur la classe lanceur*
 
+- Deplacement classe partie dans serveur
+
+- Suppression classe participant, fusion avec classe joueur.
+
 - Affichage des mains lors des tours de jeux
 
 - Organisation du code
