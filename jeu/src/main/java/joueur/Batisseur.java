@@ -3,9 +3,9 @@ package joueur;
 import jeu.Carte;
 import jeu.Couleur;
 
-public class Batiment extends Joueur {
+public class Batisseur extends Joueur {
 
-    public Batiment(String nom, String urlServeur) {
+    public Batisseur(String nom, String urlServeur) {
         super(nom, urlServeur);
     }
 

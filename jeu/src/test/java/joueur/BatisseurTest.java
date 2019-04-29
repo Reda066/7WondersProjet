@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BatimentTest {
+class BatisseurTest {
     String url = "127.0.0.1:9000";
 
-    Batiment a;
+    Batisseur a;
 
     Carte c1, c2, c3;
 
@@ -20,7 +20,7 @@ class BatimentTest {
     ArrayList<Carte> carte;
     @BeforeEach
     void setUp() {
-        this.a = new Batiment("reda", url);
+        this.a = new Batisseur("reda", url);
 
         this.m = new Merveille("EPHESOS", Face.A,3);
 

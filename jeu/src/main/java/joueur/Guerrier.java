@@ -17,4 +17,5 @@ public class Guerrier extends Joueur {
             merveille.poserUneCarte(c);
         }
     }
+
 }

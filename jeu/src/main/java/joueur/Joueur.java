@@ -254,4 +254,5 @@ public class Joueur {
     public Joueur voisinDroite(ArrayList<Joueur> joueur){
         return joueur.get(rang-1<0?joueur.size()-1:rang-1);
     }
+
 }

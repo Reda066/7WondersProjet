@@ -165,6 +165,7 @@ public class Partie {
     public void ajouterJoueur(Joueur p) {
         System.out.println("PARTIE >  " + p.getNom() + " a été ajouté a la partie");
         joueurs.add(p);
+
     }
 
     public Joueur getJoueurById(UUID id) {
